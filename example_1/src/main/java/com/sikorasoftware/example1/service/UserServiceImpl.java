@@ -1,7 +1,7 @@
-package sikorasoftware.service;
+package com.sikorasoftware.example1.service;
 
 import org.springframework.stereotype.Service;
-import sikorasoftware.model.User;
+import com.sikorasoftware.example1.model.User;
 
 import java.util.ArrayList;
 import java.util.Collection;

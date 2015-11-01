@@ -1,4 +1,4 @@
-package sikorasoftware.model;
+package com.sikorasoftware.example1.model;
 
 import java.util.Date;
 

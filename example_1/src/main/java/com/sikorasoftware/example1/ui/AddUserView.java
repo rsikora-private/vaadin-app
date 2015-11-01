@@ -1,4 +1,4 @@
-package sikorasoftware.ui;
+package com.sikorasoftware.example1.ui;
 
 import com.vaadin.ui.Button;
 import mvp.framework.View;

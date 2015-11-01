@@ -1,6 +1,6 @@
-package sikorasoftware.service;
+package com.sikorasoftware.example1.service;
 
-import sikorasoftware.model.User;
+import com.sikorasoftware.example1.model.User;
 
 import java.util.Collection;
 

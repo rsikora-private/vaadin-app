@@ -1,10 +1,9 @@
-package sikorasoftware.ui;
+package com.sikorasoftware.example1.ui;
 
+import com.sikorasoftware.example1.service.UserService;
 import mvp.framework.MVPPresenter;
 import mvp.framework.PresenterImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import sikorasoftware.service.*;
 
 /**
  * Created by robertsikora on 27.10.15.

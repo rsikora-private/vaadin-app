@@ -1,4 +1,4 @@
-package sikorasoftware.ui;
+package com.sikorasoftware.example1.ui;
 
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.spring.annotation.SpringView;
