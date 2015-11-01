@@ -1,4 +1,4 @@
-package com.sikorasoftware.ui;
+package sikorasoftware.ui;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.navigator.Navigator;
@@ -8,6 +8,7 @@ import com.vaadin.spring.navigator.SpringViewProvider;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 
 
 /**
@@ -15,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 
 @Theme("valo")
-@SpringUI
+@SpringUI(path = "example1")
 public class VaadinUI extends UI {
 
     @Autowired
@@ -31,10 +32,8 @@ public class VaadinUI extends UI {
 
         final CssLayout navigationBar = new CssLayout();
         navigationBar.addStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
-        navigationBar.addComponent(createNavigationButton("All users",
-                AllUsersView.VIEW_NAME));
-        navigationBar.addComponent(createNavigationButton("Add new user",
-                AddUserForm.VIEW_NAME));
+        navigationBar.addComponent(createNavigationButton("All users", AllUsersView.VIEW_NAME));
+        navigationBar.addComponent(createNavigationButton("Add new user", AddUserViewImpl.VIEW_NAME));
         root.addComponent(navigationBar);
 
         final Panel viewContainer = new Panel();
@@ -42,15 +41,23 @@ public class VaadinUI extends UI {
         root.addComponent(viewContainer);
         root.setExpandRatio(viewContainer, 1.0f);
 
-        Navigator navigator = new Navigator(this, viewContainer);
+        final Navigator navigator = new Navigator(this, viewContainer);
         navigator.addProvider(viewProvider);
-        navigator.addView("", new AllUsersView());
+        navigator.addView(AllUsersView.VIEW_NAME, new AllUsersView());
+        navigator.addView(AddUserViewImpl.VIEW_NAME, new AddUserViewImpl());
+
+        navigateTo(AddUserViewImpl.VIEW_NAME);
     }
 
-    private Button createNavigationButton(String caption, final String viewName) {
-        Button button = new Button(caption);
+    private Button createNavigationButton(final String caption, final String viewName) {
+        final Button button = new Button(caption);
         button.addStyleName(ValoTheme.BUTTON_SMALL);
-        button.addClickListener(event -> getUI().getNavigator().navigateTo(viewName));
+        button.addClickListener(event -> navigateTo(viewName));
         return button;
+    }
+
+    private void navigateTo(final String viewName){
+        Assert.hasText(viewName);
+        getUI().getNavigator().navigateTo(viewName);
     }
 }
