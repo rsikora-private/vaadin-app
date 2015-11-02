@@ -31,9 +31,6 @@ public class BindPostProcessor implements BeanPostProcessor {
         if(clazz.isAnnotationPresent(MVPView.class)){
             final MVPView annotation = (MVPView)clazz.getAnnotation(MVPView.class);
             final Class<? extends Presenter> presenter = annotation.presenter();
-            if(presenter == null){
-                throw new MVPInitializeException("MVP view must have posses assigned presenter class !");
-            }
             viewBinder.bindToPresenter((View)bean, presenter);
         }
         return bean;
