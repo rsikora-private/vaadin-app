@@ -1,4 +1,4 @@
-package mvp.framework;
+package mvp.framework.core;
 
 /**
  * Occurs due to failure during MVP pattern initialization.

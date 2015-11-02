@@ -1,6 +1,8 @@
-package mvp.framework;
+package mvp.framework.core;
 
 import com.vaadin.spring.annotation.SpringComponent;
+import mvp.framework.Presenter;
+import mvp.framework.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
@@ -13,7 +15,7 @@ import java.util.Objects;
  */
 
 @SpringComponent
-public final class ViewBinder {
+public class ViewBinder {
 
     @Autowired
     private ApplicationContext applicationContext;
@@ -30,11 +32,11 @@ public final class ViewBinder {
         Objects.requireNonNull(mvpView, "View is mandatory !");
         Objects.requireNonNull(presenterClazz, "Presenter is mandatory !");
         try {
-            final PresenterImpl presenter = (PresenterImpl)applicationContext.getBean(presenterClazz);
+            final Presenter presenter = (Presenter)applicationContext.getBean(presenterClazz);
             presenter.bindView(mvpView);
             presenter.init();
         }catch (Exception ex){
-            throw new MVPInitializeException(String.format("Cannot create presenter %s for view %s",
+            throw new MVPInitializeException(String.format("Cannot create a presenter %s and bind it for view %s",
                     presenterClazz.getSimpleName(), mvpView.getClass().getSimpleName()), ex);
         }
     }

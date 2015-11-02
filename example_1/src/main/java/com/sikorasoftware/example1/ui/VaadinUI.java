@@ -32,7 +32,7 @@ public class VaadinUI extends UI {
 
         final CssLayout navigationBar = new CssLayout();
         navigationBar.addStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
-        navigationBar.addComponent(createNavigationButton("All users", AllUsersView.VIEW_NAME));
+        navigationBar.addComponent(createNavigationButton("All users", AllUsersViewImpl.VIEW_NAME));
         navigationBar.addComponent(createNavigationButton("Add new user", AddUserViewImpl.VIEW_NAME));
         root.addComponent(navigationBar);
 
@@ -43,7 +43,7 @@ public class VaadinUI extends UI {
 
         final Navigator navigator = new Navigator(this, viewContainer);
         navigator.addProvider(viewProvider);
-        navigator.addView(AllUsersView.VIEW_NAME, new AllUsersView());
+        navigator.addView(AllUsersViewImpl.VIEW_NAME, new AllUsersViewImpl());
         navigator.addView(AddUserViewImpl.VIEW_NAME, new AddUserViewImpl());
 
         navigateTo(AddUserViewImpl.VIEW_NAME);

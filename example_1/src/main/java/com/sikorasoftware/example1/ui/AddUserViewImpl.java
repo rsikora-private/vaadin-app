@@ -5,8 +5,6 @@ import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.*;
 import mvp.framework.MVPView;
 
-import javax.annotation.PostConstruct;
-
 /**
  * Created by robertsikora on 27.10.15.
  */
@@ -40,16 +38,12 @@ public class AddUserViewImpl extends FormLayout implements AddUserView {
     }
 
     @Override
-    public void registerSaveButtonListener(Button.ClickListener listener) {
+    public void registerSaveButtonListener(final Button.ClickListener listener) {
         SAVE_BTN.addClickListener(listener);
     }
 
     @Override
-    public void enter(ViewChangeListener.ViewChangeEvent event) {
-    }
-
-    @PostConstruct
-    public void init() {
+    public void enter(final ViewChangeListener.ViewChangeEvent event) {
         configureComponents();
         buildLayout();
     }

@@ -1,6 +1,7 @@
-package mvp.framework;
+package mvp.framework.core;
 
 import com.vaadin.spring.annotation.SpringComponent;
+import mvp.framework.*;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
