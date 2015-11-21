@@ -1,14 +1,20 @@
 package com.sikorasoftware.example1.ui;
 
+import com.sikorasoftware.example1.ui.add_user.AddUserViewImpl;
+import com.sikorasoftware.example1.ui.all_users.AllUsersViewImpl;
 import com.vaadin.annotations.Theme;
 import com.vaadin.navigator.Navigator;
+import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.spring.navigator.SpringViewProvider;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
+
+import java.util.Locale;
 
 
 /**
@@ -24,6 +30,9 @@ public class VaadinUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
+
+        setLocale(VaadinSession.getCurrent().getLocale());
+
         final VerticalLayout root = new VerticalLayout();
         root.setSizeFull();
         root.setMargin(true);
@@ -34,7 +43,6 @@ public class VaadinUI extends UI {
         navigationBar.addStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
         navigationBar.addComponent(createNavigationButton("All users", AllUsersViewImpl.VIEW_NAME));
         navigationBar.addComponent(createNavigationButton("Add new user", AddUserViewImpl.VIEW_NAME));
-        root.addComponent(navigationBar);
 
         final Panel viewContainer = new Panel();
         viewContainer.setSizeFull();
@@ -43,10 +51,25 @@ public class VaadinUI extends UI {
 
         final Navigator navigator = new Navigator(this, viewContainer);
         navigator.addProvider(viewProvider);
-        navigator.addView(AllUsersViewImpl.VIEW_NAME, new AllUsersViewImpl());
-        navigator.addView(AddUserViewImpl.VIEW_NAME, new AddUserViewImpl());
+        /*AllUsersViewImpl view1 = new AllUsersViewImpl();
+        AddUserViewImpl view2 = new AddUserViewImpl();
+        navigator.addView("", view1);
+        navigator.addView(AddUserViewImpl.VIEW_NAME, view2);*/
 
         navigateTo(AddUserViewImpl.VIEW_NAME);
+
+        Button changeLocal = new Button("EN/PL",
+            t->{
+                final Locale locale = UI.getCurrent().getLocale().equals(Locale.ENGLISH)? Locale.getDefault():Locale.ENGLISH;
+
+                UI.getCurrent().setLocale(locale);
+                VaadinSession.getCurrent().setLocale(locale);
+
+                Page.getCurrent().reload();
+            });
+
+        navigationBar.addComponent(changeLocal);
+        root.addComponent(navigationBar);
     }
 
     private Button createNavigationButton(final String caption, final String viewName) {

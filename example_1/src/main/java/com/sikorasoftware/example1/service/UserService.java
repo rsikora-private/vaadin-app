@@ -11,4 +11,5 @@ public interface UserService {
 
     User save(User user);
     Collection<User> getAllUsers();
+    Collection<User> getAllUsers(String filter);
 }
