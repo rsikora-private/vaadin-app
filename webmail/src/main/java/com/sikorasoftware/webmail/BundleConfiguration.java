@@ -21,7 +21,7 @@ public class BundleConfiguration {
         messageSource.setBasenames("bundle.application");
         return messageSource;
     }
-
+/*
     public final static String JSR303_BUNDLE = "jsr303Bundle";
 
     @Bean(name = JSR303_BUNDLE)
@@ -30,5 +30,5 @@ public class BundleConfiguration {
         messageSource.setDefaultEncoding("UTF-8");
         messageSource.setBasenames("bundle.ValidationMessages");
         return messageSource;
-    }
+    }*/
 }

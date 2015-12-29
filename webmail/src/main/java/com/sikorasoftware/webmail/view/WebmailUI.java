@@ -1,6 +1,7 @@
 package com.sikorasoftware.webmail.view;
 
 import com.sikorasoftware.webmail.config.AppConfig;
+import com.sikorasoftware.webmail.view.login.LoginView;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
@@ -29,11 +30,8 @@ public class WebmailUI extends UI {
 
         setLocale(Locale.ENGLISH);
 
-        final VerticalLayout root = new VerticalLayout();
-        root.setSizeFull();
-        root.setMargin(true);
-        root.setSpacing(true);
-        setContent(root);
+        setContent(new LoginView());
+        addStyleName("loginview");
 /*
         final CssLayout navigationBar = new CssLayout();
         navigationBar.addStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);

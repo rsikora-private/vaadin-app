@@ -8,6 +8,6 @@ public class AppConfig {
     private AppConfig(){
     }
 
-    public final static String APP_URI = "webmail";
-    public final static String APP_THEME = "velo";
+    public final static String APP_URI   = "webmail";
+    public final static String APP_THEME = "dashboard";
 }
