@@ -20,10 +20,23 @@ public class AllUserPresenter extends PresenterImpl<AllUserView> {
 
     @Override
     public void init() {
+        fillGrid();
+        bindFilter();
+        bindLabel();
+    }
+
+    private void fillGrid(){
         view().getGrid().setContainerDataSource(new BeanItemContainer<>(User.class, userService.getAllUsers()));
+    }
+
+    private void bindFilter(){
         view().getFilter().addTextChangeListener(blur ->
-            view().getGrid().setContainerDataSource(
-                new BeanItemContainer<>(User.class, userService.getAllUsers(blur.getText())))
+                view().getGrid().setContainerDataSource(
+                        new BeanItemContainer<>(User.class, userService.getAllUsers(blur.getText())))
         );
+    }
+
+    private void bindLabel(){
+        view().getGrid().addSelectionListener(t -> view().getLabel().setValue(t.getSelected().toString()));
     }
 }

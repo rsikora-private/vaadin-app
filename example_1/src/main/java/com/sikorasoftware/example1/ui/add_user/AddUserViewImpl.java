@@ -42,12 +42,6 @@ public class AddUserViewImpl extends FormLayout implements AddUserView {
         addComponents(actions, firstName, lastName, phone, email, birthDate);
     }
 
-
-    @Override
-    public void registerSaveButtonListener(final Button.ClickListener listener) {
-        saveBtn.addClickListener(listener);
-    }
-
     @Override
     public void enter(final ViewChangeListener.ViewChangeEvent event) {
         configureComponents();
@@ -62,5 +56,10 @@ public class AddUserViewImpl extends FormLayout implements AddUserView {
     @Override
     public BeanFieldGroup<User> getEntityBinder() {
         return binder;
+    }
+
+    @Override
+    public Button getSaveButton() {
+        return saveBtn;
     }
 }

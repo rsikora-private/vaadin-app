@@ -9,6 +9,7 @@
 	<modules>
 		<module>mvp-vaadin-spring</module>
 		<module>example_1</module>
+		<module>webmail</module>
 	</modules>
 	<packaging>pom</packaging>
 

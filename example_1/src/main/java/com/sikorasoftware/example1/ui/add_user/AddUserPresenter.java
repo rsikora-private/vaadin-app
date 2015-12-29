@@ -33,6 +33,6 @@ public class AddUserPresenter extends PresenterImpl<AddUserView> {
 
     @Override
     public void init(){
-        view().registerSaveButtonListener(event -> save());
+        view().getSaveButton().addClickListener(t->save());
     }
 }

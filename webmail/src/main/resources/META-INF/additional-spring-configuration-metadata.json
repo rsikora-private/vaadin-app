@@ -1,0 +1,11 @@
+{
+  "properties": [
+    {
+      "name": "custom.variable1",
+      "type": "java.lang.String",
+      "defaultValue": "foo",
+      "description": "Example how to use custom properties"
+    }
+  ]
+
+}

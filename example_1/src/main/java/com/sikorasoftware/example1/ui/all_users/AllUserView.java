@@ -1,6 +1,7 @@
 package com.sikorasoftware.example1.ui.all_users;
 
 import com.vaadin.ui.Grid;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import mvp.framework.View;
 
@@ -9,9 +10,7 @@ import mvp.framework.View;
  */
 public interface AllUserView extends View {
 
-    String REFRESH_BTN = "ALL-User.refresh";
-
     TextField getFilter();
-
     Grid getGrid();
+    Label getLabel();
 }

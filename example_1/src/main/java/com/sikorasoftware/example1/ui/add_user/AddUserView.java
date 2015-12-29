@@ -17,5 +17,5 @@ public interface AddUserView extends View, EntityBindingView<User> {
     String DOB_LBL = "Add-User.dob";
     String SAVE_BTN = "Add-User.save";
 
-    void registerSaveButtonListener(Button.ClickListener listener);
+    Button getSaveButton();
 }

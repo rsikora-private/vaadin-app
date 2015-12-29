@@ -90,4 +90,17 @@ public class User implements Cloneable {
             throw new CloneNotSupportedException();
         }
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("User{");
+        sb.append("id=").append(id);
+        sb.append(", firstName='").append(firstName).append('\'');
+        sb.append(", lastName='").append(lastName).append('\'');
+        sb.append(", phone='").append(phone).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", birthDate=").append(birthDate);
+        sb.append('}');
+        return sb.toString();
+    }
 }

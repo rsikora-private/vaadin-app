@@ -19,11 +19,15 @@ public class AllUsersViewImpl extends VerticalLayout implements AllUserView {
     public static final String VIEW_NAME = "all-users";
 
     private final TextField filter = new TextField();
+    {
+        filter.setInputPrompt("filter ... ");
+    }
     private final Grid userList = new Grid();
+    private final Label label = new Label();
 
     @Override
     public void enter(final ViewChangeListener.ViewChangeEvent event) {
-        addComponents(filter, userList);
+        addComponents(filter, userList, label);
         configureComponents();
     }
 
@@ -42,5 +46,10 @@ public class AllUsersViewImpl extends VerticalLayout implements AllUserView {
     @Override
     public Grid getGrid() {
         return userList;
+    }
+
+    @Override
+    public Label getLabel() {
+        return label;
     }
 }

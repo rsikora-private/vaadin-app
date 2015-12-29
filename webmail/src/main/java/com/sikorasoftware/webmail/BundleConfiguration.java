@@ -1,4 +1,4 @@
-package com.sikorasoftware.example1;
+package com.sikorasoftware.webmail;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;

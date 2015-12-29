@@ -1,4 +1,4 @@
-package com.sikorasoftware.example1.bundle;
+package com.sikorasoftware.example1;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
