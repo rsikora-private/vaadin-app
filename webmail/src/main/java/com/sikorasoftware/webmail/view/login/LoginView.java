@@ -1,8 +1,13 @@
 package com.sikorasoftware.webmail.view.login;
 
+import com.sikorasoftware.webmail.layout.style.Styleable;
+import com.sikorasoftware.webmail.mvp.ViewManager;
 import com.vaadin.event.ShortcutAction.KeyCode;
+import com.vaadin.navigator.View;
+import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Responsive;
+import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CheckBox;
@@ -14,13 +19,28 @@ import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.vaadin.spring.annotation.VaadinComponent;
 
-@SuppressWarnings("serial")
-public class LoginView extends VerticalLayout {
+import javax.annotation.PostConstruct;
+
+@VaadinComponent
+@UIScope
+public class LoginView extends VerticalLayout implements View, Styleable {
 
     public final static String LOGIN_PANEL_CSS = "login-panel";
     public final static String FIELDS_CSS = "fields";
     public final static String LABELS_CSS = "labels";
+
+    private Button signin;
+
+    @Autowired
+    private ViewManager viewManager;
+
+    @PostConstruct
+    public void init() {
+        viewManager.configure(this);
+    }
 
     public LoginView() {
         setSizeFull();
@@ -56,21 +76,13 @@ public class LoginView extends VerticalLayout {
         password.setIcon(FontAwesome.LOCK);
         password.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
 
-        final Button signin = new Button("Log In");
+        signin = new Button("Log In");
         signin.addStyleName(ValoTheme.BUTTON_PRIMARY);
         signin.setClickShortcut(KeyCode.ENTER);
         signin.focus();
 
         fields.addComponents(username, password, signin);
         fields.setComponentAlignment(signin, Alignment.BOTTOM_LEFT);
-
-        /*signin.addClickListener(new ClickListener() {
-            @Override
-            public void buttonClick(final ClickEvent event) {
-                DashboardEventBus.post(new UserLoginRequestedEvent(username
-                        .getValue(), password.getValue()));
-            }
-        });*/
         return fields;
     }
 
@@ -85,5 +97,19 @@ public class LoginView extends VerticalLayout {
         labels.addComponent(welcome);
 
         return labels;
+    }
+
+    @Override
+    public void enter(ViewChangeListener.ViewChangeEvent event) {
+
+    }
+
+    @Override
+    public String getStyle() {
+        return "loginview";
+    }
+
+    public Button getSigninButton() {
+        return signin;
     }
 }

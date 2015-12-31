@@ -1,0 +1,34 @@
+package com.sikorasoftware.webmail.mvp;
+
+import com.vaadin.navigator.View;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+
+/**
+ * Created by robertsikora on 31.12.2015.
+ *
+ * ViewManager that configure Presenters following
+ * the naming convention XXView->XXPresenter
+ */
+
+@Component
+public class DefaultViewManager implements ViewManager {
+
+    @Autowired
+    private ApplicationContext applicationContext;
+
+    @Override
+    public void configure(View view) {
+        Presenter p = (Presenter) applicationContext.getBean(getPresenterName(view.getClass()));
+        p.setView(view);
+        p.bind();
+
+    }
+
+    protected String getPresenterName(Class<?> clazz) {
+        return StringUtils.uncapitalize(clazz.getSimpleName()).replace("View", "Presenter");
+    }
+
+}

@@ -1,10 +1,10 @@
 package mvp.framework.core;
 
-import com.vaadin.spring.annotation.SpringComponent;
 import mvp.framework.Presenter;
 import mvp.framework.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
@@ -14,7 +14,7 @@ import java.util.Objects;
  * Created by robertsikora on 01.11.15.
  */
 
-@SpringComponent
+@Component
 public class ViewBinder {
 
     @Autowired

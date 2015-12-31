@@ -1,10 +1,10 @@
 package mvp.framework.core;
 
-import com.vaadin.spring.annotation.SpringComponent;
 import mvp.framework.*;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.stereotype.Component;
 
 /**
  *
@@ -14,7 +14,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
  * Created by robertsikora on 01.11.15.
  */
 
-@SpringComponent
+@Component
 public class BindPostProcessor implements BeanPostProcessor {
 
     @Autowired

@@ -1,7 +1,7 @@
 package mvp.framework;
 
-import com.vaadin.spring.annotation.SpringComponent;
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
@@ -17,7 +17,7 @@ import java.lang.annotation.Target;
 @Target({ java.lang.annotation.ElementType.TYPE })
 @Retention(java.lang.annotation.RetentionPolicy.RUNTIME)
 @Documented
-@SpringComponent
+@Component
 @Scope(value = "prototype")
 public @interface MVPPresenter {
 }
