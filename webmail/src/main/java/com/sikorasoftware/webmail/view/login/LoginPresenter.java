@@ -3,6 +3,7 @@ package com.sikorasoftware.webmail.view.login;
 import com.sikorasoftware.webmail.event.WebmailEvent;
 import com.sikorasoftware.webmail.event.WebmailEventBus;
 import com.sikorasoftware.webmail.mvp.Presenter;
+import com.sikorasoftware.webmail.service.login.LoginService;
 import com.vaadin.navigator.View;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Button;
@@ -22,9 +23,14 @@ public class LoginPresenter implements Presenter, Button.ClickListener {
     @Autowired
     private WebmailEventBus webmailEventBus;
 
+    @Autowired
+    private LoginService loginService;
+
     @Override
     public void buttonClick(final Button.ClickEvent event) {
-        webmailEventBus.post(new WebmailEvent.UserLoginRequestedEvent("dsf", "ddd"));
+
+        loginService.login(view.getUsername().getValue(), view.getPassword().getValue());
+        webmailEventBus.post(new WebmailEvent.SuccessLoginEvent());
     }
 
     @Override

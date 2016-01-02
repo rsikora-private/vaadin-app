@@ -1,10 +1,11 @@
-package com.sikorasoftware.webmail.view;
+package com.sikorasoftware.webmail;
 
 import com.google.common.eventbus.Subscribe;
 import com.sikorasoftware.webmail.config.AppConfig;
 import com.sikorasoftware.webmail.event.WebmailEvent;
 import com.sikorasoftware.webmail.event.WebmailEventBus;
 import com.sikorasoftware.webmail.view.login.LoginView;
+import com.sikorasoftware.webmail.view.main.MainView;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
@@ -28,6 +29,9 @@ public class WebmailUI extends UI {
     @Autowired
     private LoginView loginView;
 
+    @Autowired
+    private MainView mainView;
+
     @Override
     protected void init(VaadinRequest request) {
 
@@ -39,9 +43,9 @@ public class WebmailUI extends UI {
     }
 
     @Subscribe
-    public void onLoginEvent(final WebmailEvent.UserLoginRequestedEvent event) {
-
-        Notification.show("hurrrrrra");
+    public void onSuccessLoginEvent(final WebmailEvent.SuccessLoginEvent event) {
+        mainView.initializeNavigator();
+        setContent(mainView);
     }
 
     @PreDestroy

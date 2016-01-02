@@ -28,11 +28,13 @@ import javax.annotation.PostConstruct;
 @UIScope
 public class LoginView extends VerticalLayout implements View, Styleable {
 
-    public final static String LOGIN_PANEL_CSS = "login-panel";
-    public final static String FIELDS_CSS = "fields";
-    public final static String LABELS_CSS = "labels";
+    private final static String LOGIN_PANEL_CSS = "login-panel";
+    private final static String FIELDS_CSS = "fields";
+    private final static String LABELS_CSS = "labels";
 
     private Button signin;
+    private TextField username;
+    private PasswordField password;
 
     @Autowired
     private ViewManager viewManager;
@@ -68,20 +70,20 @@ public class LoginView extends VerticalLayout implements View, Styleable {
         fields.setSpacing(true);
         fields.addStyleName(FIELDS_CSS);
 
-        final TextField username = new TextField("Username");
-        username.setIcon(FontAwesome.USER);
-        username.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
+        username = new TextField("Username");
+        getUsername().setIcon(FontAwesome.USER);
+        getUsername().addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
+        getUsername().focus();
 
-        final PasswordField password = new PasswordField("Password");
-        password.setIcon(FontAwesome.LOCK);
-        password.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
+        password = new PasswordField("Password");
+        getPassword().setIcon(FontAwesome.LOCK);
+        getPassword().addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
 
         signin = new Button("Log In");
         signin.addStyleName(ValoTheme.BUTTON_PRIMARY);
         signin.setClickShortcut(KeyCode.ENTER);
-        signin.focus();
 
-        fields.addComponents(username, password, signin);
+        fields.addComponents(getUsername(), getPassword(), signin);
         fields.setComponentAlignment(signin, Alignment.BOTTOM_LEFT);
         return fields;
     }
@@ -111,5 +113,13 @@ public class LoginView extends VerticalLayout implements View, Styleable {
 
     public Button getSigninButton() {
         return signin;
+    }
+
+    public TextField getUsername() {
+        return username;
+    }
+
+    public PasswordField getPassword() {
+        return password;
     }
 }

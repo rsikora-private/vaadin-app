@@ -1,6 +1,6 @@
 package com.sikorasoftware.webmail.bundle;
 
-import com.sikorasoftware.webmail.BundleConfiguration;
+import com.sikorasoftware.webmail.config.BundleConfiguration;
 import com.vaadin.ui.UI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
