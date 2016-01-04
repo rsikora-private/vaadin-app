@@ -52,8 +52,8 @@ public class AccountView extends FormLayout implements View {
         addComponents(getAddNewButton(), tabSheet);
     }
 
-    public Button addNewTab(){
-        tabSheet.addTab(buildAccountForm(), "New account");
+    public Button addNewTab(final String tabCaption){
+        tabSheet.addTab(buildAccountForm(), tabCaption);
         return saveAccountButton;
     }
 
@@ -67,24 +67,20 @@ public class AccountView extends FormLayout implements View {
         final TextField imapPort = new TextField("IMAP port :");
         final CheckBox imapSSL = new CheckBox("IMAP use SSL");
         saveAccountButton = new Button("Save account");
-        getSaveAccountButton().addStyleName(ValoTheme.BUTTON_PRIMARY);
-        getSaveAccountButton().setClickShortcut(ShortcutAction.KeyCode.ENTER);
+        saveAccountButton.addStyleName(ValoTheme.BUTTON_PRIMARY);
+        saveAccountButton.setClickShortcut(ShortcutAction.KeyCode.ENTER);
 
         formLayout.setSizeFull();
         formLayout.setSpacing(true);
         formLayout.setMargin(true);
 
         formLayout.addComponents(name, email, password,
-                imapHost, imapPort, imapSSL, getSaveAccountButton());
+                imapHost, imapPort, imapSSL, saveAccountButton);
 
         return formLayout;
     }
 
     public Button getAddNewButton() {
         return addNewButton;
-    }
-
-    public Button getSaveAccountButton() {
-        return saveAccountButton;
     }
 }

@@ -96,15 +96,14 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Account{");
-        sb.append("id=").append(id);
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", email='").append(email).append('\'');
-        sb.append(", password='").append(password).append('\'');
-        sb.append(", imapHost='").append(imapHost).append('\'');
-        sb.append(", imapPort='").append(imapPort).append('\'');
-        sb.append(", imapSSL=").append(imapSSL);
-        sb.append('}');
-        return sb.toString();
+        String sb = "Account{" + "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", imapHost='" + imapHost + '\'' +
+                ", imapPort='" + imapPort + '\'' +
+                ", imapSSL=" + imapSSL +
+                '}';
+        return sb;
     }
 }

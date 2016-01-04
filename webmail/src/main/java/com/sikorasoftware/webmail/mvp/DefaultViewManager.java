@@ -24,7 +24,7 @@ public class DefaultViewManager implements ViewManager {
     public void configure(View view) {
         Assert.notNull(view);
 
-        Presenter p = (Presenter) applicationContext.getBean(getPresenterName(view.getClass()));
+        final AbstractPresenter p = (AbstractPresenter) applicationContext.getBean(getPresenterName(view.getClass()));
         p.setView(view);
         p.bind();
 
@@ -33,5 +33,4 @@ public class DefaultViewManager implements ViewManager {
     private String getPresenterName(final Class<?> clazz) {
         return StringUtils.uncapitalize(clazz.getSimpleName()).replace("View", "Presenter");
     }
-
 }
