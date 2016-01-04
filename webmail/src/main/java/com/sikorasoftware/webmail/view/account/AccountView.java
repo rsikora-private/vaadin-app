@@ -30,6 +30,7 @@ public class AccountView extends FormLayout implements View {
 
     private TabSheet tabSheet;
     private Button   addNewButton;
+    private Button   saveAccountButton;
 
     public AccountView(){
         buildLayout();
@@ -51,37 +52,39 @@ public class AccountView extends FormLayout implements View {
         addComponents(getAddNewButton(), tabSheet);
     }
 
-    public void addNewTab(){
+    public Button addNewTab(){
         tabSheet.addTab(buildAccountForm(), "New account");
+        return saveAccountButton;
     }
 
     private FormLayout buildAccountForm() {
         final FormLayout formLayout = new FormLayout();
-        final TextField accountName = new TextField("Account name :");
-        accountName.focus();
-        final TextField accountEmail = new TextField("Email :");
-        final PasswordField accountPassword = new PasswordField("Password :");
-        final TextField accountImapHost = new TextField("IMAP host :");
-        final TextField accountImapPort = new TextField("IMAP port :");
-        final CheckBox accountImapSSL = new CheckBox("IMAP use SSL");
-        final Button saveAccount = new Button("Save account");
-        saveAccount.addStyleName(ValoTheme.BUTTON_PRIMARY);
-        saveAccount.setClickShortcut(ShortcutAction.KeyCode.ENTER);
+        final TextField name = new TextField("Account name :");
+        name.focus();
+        final TextField email = new TextField("Email :");
+        final PasswordField password = new PasswordField("Password :");
+        final TextField imapHost = new TextField("IMAP host :");
+        final TextField imapPort = new TextField("IMAP port :");
+        final CheckBox imapSSL = new CheckBox("IMAP use SSL");
+        saveAccountButton = new Button("Save account");
+        getSaveAccountButton().addStyleName(ValoTheme.BUTTON_PRIMARY);
+        getSaveAccountButton().setClickShortcut(ShortcutAction.KeyCode.ENTER);
 
         formLayout.setSizeFull();
         formLayout.setSpacing(true);
         formLayout.setMargin(true);
 
-        formLayout.addComponents(accountName, accountEmail, accountPassword,
-                accountImapHost, accountImapPort, accountImapSSL, saveAccount);
-
-        formLayout.setComponentAlignment(accountImapSSL, Alignment.BOTTOM_LEFT);
-        formLayout.setComponentAlignment(saveAccount, Alignment.BOTTOM_LEFT);
+        formLayout.addComponents(name, email, password,
+                imapHost, imapPort, imapSSL, getSaveAccountButton());
 
         return formLayout;
     }
 
     public Button getAddNewButton() {
         return addNewButton;
+    }
+
+    public Button getSaveAccountButton() {
+        return saveAccountButton;
     }
 }

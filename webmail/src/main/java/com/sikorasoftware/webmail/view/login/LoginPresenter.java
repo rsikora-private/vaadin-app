@@ -3,7 +3,7 @@ package com.sikorasoftware.webmail.view.login;
 import com.sikorasoftware.webmail.event.WebmailEvent;
 import com.sikorasoftware.webmail.event.WebmailEventBus;
 import com.sikorasoftware.webmail.mvp.Presenter;
-import com.sikorasoftware.webmail.service.login.LoginService;
+import com.sikorasoftware.webmail.login.LoginService;
 import com.vaadin.navigator.View;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Button;

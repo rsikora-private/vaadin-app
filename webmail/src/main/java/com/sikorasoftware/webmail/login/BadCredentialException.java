@@ -1,4 +1,4 @@
-package com.sikorasoftware.webmail.service.login;
+package com.sikorasoftware.webmail.login;
 
 /**
  * Created by robertsikora on 31.12.2015.
