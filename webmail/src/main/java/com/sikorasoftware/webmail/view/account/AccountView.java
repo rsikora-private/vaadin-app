@@ -1,15 +1,18 @@
 package com.sikorasoftware.webmail.view.account;
 
+import com.sikorasoftware.webmail.account.Account;
 import com.sikorasoftware.webmail.mvp.ViewManager;
-import com.vaadin.event.ShortcutAction;
+import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.util.Assert;
 import javax.annotation.PostConstruct;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by robertsikora on 31.12.2015.
@@ -20,6 +23,8 @@ public class AccountView extends FormLayout implements View {
 
     public final static String NAME = "account";
 
+    private final Map<TabSheet.Tab, BeanFieldGroup<Account>> TAB_BINDING = new HashMap<>();
+
     @Autowired
     private ViewManager viewManager;
 
@@ -28,59 +33,74 @@ public class AccountView extends FormLayout implements View {
         viewManager.configure(this);
     }
 
-    private TabSheet tabSheet;
-    private Button   addNewButton;
-    private Button   saveAccountButton;
+    private final TabSheet        tabSheet = new TabSheet();
+    {
+        tabSheet.setHeight(500, Unit.PIXELS);
+        tabSheet.addStyleName(ValoTheme.TABSHEET_FRAMED);
+        tabSheet.addStyleName(ValoTheme.TABSHEET_PADDED_TABBAR);
+    }
+
+    private final Button          addNewButton = new Button("Add new account");
+    private final Button          saveAccountButton = new Button("Save account");
+    {
+        saveAccountButton.addStyleName(ValoTheme.BUTTON_PRIMARY);
+    }
+    private final Button          deleteButton = new Button("Delete account");
+    {
+        deleteButton.addStyleName(ValoTheme.BUTTON_DANGER);
+    }
 
     public AccountView(){
         buildLayout();
+    }
+
+    private void buildLayout() {
+        final HorizontalLayout horizontalLayout = new HorizontalLayout();
+        horizontalLayout.setSpacing(true);
+        horizontalLayout.addComponents(addNewButton, saveAccountButton, deleteButton);
+
+        addComponents(horizontalLayout, tabSheet);
     }
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event) {
     }
 
-    private void buildLayout() {
-
-        addNewButton = new Button("Add new account");
-        addNewButton.addStyleName(ValoTheme.BUTTON_SMALL);
-        tabSheet = new TabSheet();
-        tabSheet.setHeight(500, Unit.PIXELS);
-        tabSheet.addStyleName(ValoTheme.TABSHEET_FRAMED);
-        tabSheet.addStyleName(ValoTheme.TABSHEET_PADDED_TABBAR);
-
-        addComponents(getAddNewButton(), tabSheet);
+    public void removeAllTabs(){
+        TAB_BINDING.keySet().forEach(tabSheet::removeTab);
+        TAB_BINDING.clear();
     }
 
-    public Button addNewTab(final String tabCaption){
-        tabSheet.addTab(buildAccountForm(), tabCaption);
-        return saveAccountButton;
+    public void addTab(final String tabCaption, final Account account, boolean selectTab){
+        final AccountForm accountForm = new AccountForm();
+        final TabSheet.Tab tab = tabSheet.addTab(accountForm, tabCaption);
+        if(selectTab) {
+            tabSheet.setSelectedTab(tab);
+        }
+        final BeanFieldGroup<Account> accountBeanFieldGroup = BeanFieldGroup.bindFieldsBuffered(account, accountForm);
+        TAB_BINDING.put(tab, accountBeanFieldGroup);
     }
 
-    private FormLayout buildAccountForm() {
-        final FormLayout formLayout = new FormLayout();
-        final TextField name = new TextField("Account name :");
-        name.focus();
-        final TextField email = new TextField("Email :");
-        final PasswordField password = new PasswordField("Password :");
-        final TextField imapHost = new TextField("IMAP host :");
-        final TextField imapPort = new TextField("IMAP port :");
-        final CheckBox imapSSL = new CheckBox("IMAP use SSL");
-        saveAccountButton = new Button("Save account");
-        saveAccountButton.addStyleName(ValoTheme.BUTTON_PRIMARY);
-        saveAccountButton.setClickShortcut(ShortcutAction.KeyCode.ENTER);
+    public BeanFieldGroup getCurrentTabBinder(){
+        final TabSheet.Tab selectedTab = tabSheet.getTab(tabSheet.getSelectedTab());
+        final BeanFieldGroup<Account> binder = TAB_BINDING.get(selectedTab);
+        Assert.notNull(binder);
+        return binder;
+    }
 
-        formLayout.setSizeFull();
-        formLayout.setSpacing(true);
-        formLayout.setMargin(true);
-
-        formLayout.addComponents(name, email, password,
-                imapHost, imapPort, imapSSL, saveAccountButton);
-
-        return formLayout;
+    public AccountForm getSelectedAccountForm(){
+        return (AccountForm) tabSheet.getSelectedTab();
     }
 
     public Button getAddNewButton() {
         return addNewButton;
+    }
+
+    public Button getSaveAccountButton() {
+        return saveAccountButton;
+    }
+
+    public Button getDeleteButton() {
+        return deleteButton;
     }
 }

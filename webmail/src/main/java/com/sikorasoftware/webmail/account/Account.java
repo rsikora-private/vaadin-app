@@ -1,5 +1,7 @@
 package com.sikorasoftware.webmail.account;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
@@ -12,10 +14,16 @@ public class Account implements Serializable {
 
     @Id
     private String id;
+    @NotBlank
     private String name;
+    @NotBlank
+    @Email
     private String email;
+    @NotBlank
     private String password;
+    @NotBlank
     private String imapHost;
+    @NotBlank
     private String imapPort;
     private Boolean imapSSL;
 
