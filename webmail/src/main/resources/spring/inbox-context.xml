@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="inboxService" class="com.sikorasoftware.webmail.inbox.InboxService" />
+
+    <bean id="messageCreator" class="com.sikorasoftware.webmail.inbox.MailMessageCreator" />
+
+    <bean id="mailProcessor" class="com.sikorasoftware.webmail.inbox.MailProcessor" >
+        <property name="inboxService" ref="inboxService"/>
+        <property name="mailMessageCreator" ref="messageCreator" />
+    </bean>
+
+    <bean id="emailReceiverRoute" class="com.sikorasoftware.webmail.inbox.EmailReceiveRoute" >
+        <property name="accountService" ref="accountService"/>
+        <property name="mailProcessor" ref="mailProcessor" />
+    </bean>
+
+</beans>

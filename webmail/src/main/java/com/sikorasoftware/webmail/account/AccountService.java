@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by robertsikora on 01.01.2016.
@@ -28,6 +30,14 @@ public class AccountService {
     public void delete(final String accountId){
 
         accountRepository.delete(accountId);
+    }
+
+    public Optional<Account> getDefaultAccount(){
+        final Iterator<Account> accountIterator = accountRepository.findAll().iterator();
+        if(accountIterator.hasNext()){
+            return Optional.of(accountIterator.next());
+        }
+        return Optional.empty();
     }
 
     @Autowired

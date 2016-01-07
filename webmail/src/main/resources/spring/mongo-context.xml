@@ -14,6 +14,6 @@
         <constructor-arg value="webmail" />
     </bean>
 
-    <mongo:repositories base-package="com.sikorasoftware.webmail.account" />
+    <mongo:repositories base-package="com.sikorasoftware.webmail.account,com.sikorasoftware.webmail.inbox" />
 
 </beans>

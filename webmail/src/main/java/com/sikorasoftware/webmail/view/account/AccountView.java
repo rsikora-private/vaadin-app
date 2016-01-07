@@ -11,6 +11,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import javax.annotation.PostConstruct;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +20,7 @@ import java.util.Map;
  */
 
 @SpringView(name = AccountView.NAME)
-public class AccountView extends FormLayout implements View {
+public class AccountView extends FormLayout implements View, Serializable {
 
     public final static String NAME = "account";
 
@@ -41,13 +42,18 @@ public class AccountView extends FormLayout implements View {
     }
 
     private final Button          addNewButton = new Button("Add new account");
+    {
+        addNewButton.addStyleName(ValoTheme.BUTTON_SMALL);
+    }
     private final Button          saveAccountButton = new Button("Save account");
     {
         saveAccountButton.addStyleName(ValoTheme.BUTTON_PRIMARY);
+        saveAccountButton.addStyleName(ValoTheme.BUTTON_SMALL);
     }
     private final Button          deleteButton = new Button("Delete account");
     {
         deleteButton.addStyleName(ValoTheme.BUTTON_DANGER);
+        deleteButton.addStyleName(ValoTheme.BUTTON_SMALL);
     }
 
     public AccountView(){

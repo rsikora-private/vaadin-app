@@ -13,6 +13,7 @@ import com.vaadin.ui.Button;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.spring.annotation.VaadinComponent;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ import java.util.List;
 
 @VaadinComponent
 @UIScope
-public class AccountPresenter extends AbstractPresenter<AccountView> {
+public class AccountPresenter extends AbstractPresenter<AccountView> implements Serializable {
 
     private final static String TAB_CAPTION = "New account";
 

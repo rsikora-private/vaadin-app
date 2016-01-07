@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * Created by robertsikora on 04.01.2016.
  */
-public class Account implements Serializable {
+public final class Account implements Serializable {
 
     @Id
     private String id;
@@ -104,7 +104,7 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        String sb = "Account{" + "id=" + id +
+        return "Account{" + "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
@@ -112,6 +112,5 @@ public class Account implements Serializable {
                 ", imapPort='" + imapPort + '\'' +
                 ", imapSSL=" + imapSSL +
                 '}';
-        return sb;
     }
 }

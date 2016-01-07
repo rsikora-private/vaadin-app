@@ -7,7 +7,7 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Resource;
 
 public enum ViewType {
-    INBOX(InboxView.NAME, InboxView.class, FontAwesome.PLAY, true),
+    INBOX(InboxView.NAME, InboxView.class, FontAwesome.ENVELOPE, true),
     ACCOUNT(AccountView.NAME, AccountView.class, FontAwesome.USER, true);
 
     private final String viewName;
