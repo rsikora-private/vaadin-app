@@ -2,12 +2,14 @@ package com.sikorasoftware.webmail.view;
 
 import com.sikorasoftware.webmail.view.account.AccountView;
 import com.sikorasoftware.webmail.view.inbox.InboxView;
+import com.sikorasoftware.webmail.view.outbox.OutboxView;
 import com.vaadin.navigator.View;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Resource;
 
 public enum ViewType {
     INBOX(InboxView.NAME, InboxView.class, FontAwesome.ENVELOPE, true),
+    OUTBOX(OutboxView.NAME, OutboxView.class, FontAwesome.ENVELOPE_SQUARE, true),
     ACCOUNT(AccountView.NAME, AccountView.class, FontAwesome.USER, true);
 
     private final String viewName;

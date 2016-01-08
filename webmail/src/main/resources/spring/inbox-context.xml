@@ -3,7 +3,9 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="inboxService" class="com.sikorasoftware.webmail.inbox.InboxService" />
+    <bean id="inboxService" class="com.sikorasoftware.webmail.inbox.InboxService" >
+         <property name="accountService" ref="accountService" />
+    </bean>
 
     <bean id="messageCreator" class="com.sikorasoftware.webmail.inbox.MailMessageCreator" />
 

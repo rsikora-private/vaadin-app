@@ -1,9 +1,9 @@
 package com.sikorasoftware.webmail.view.account;
 
-import com.sikorasoftware.webmail.common.exception.component.LengthVisitator;
-import com.sikorasoftware.webmail.common.exception.component.NullRepresentationVisitator;
-import com.sikorasoftware.webmail.common.exception.component.TextFieldVisitatorEngine;
-import com.sikorasoftware.webmail.common.exception.component.ValidationVisibleVisitator;
+import com.sikorasoftware.webmail.common.component.textfield.LengthVisitator;
+import com.sikorasoftware.webmail.common.component.textfield.NullRepresentationVisitator;
+import com.sikorasoftware.webmail.common.component.textfield.TextFieldVisitatorEngine;
+import com.sikorasoftware.webmail.common.component.textfield.ValidationVisibleVisitator;
 import com.vaadin.ui.*;
 
 /**

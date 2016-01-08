@@ -2,9 +2,9 @@ package com.sikorasoftware.webmail.view.account;
 
 import com.sikorasoftware.webmail.account.Account;
 import com.sikorasoftware.webmail.account.AccountService;
-import com.sikorasoftware.webmail.common.exception.component.TextFieldVisitatorEngine;
-import com.sikorasoftware.webmail.common.exception.component.ValidationVisibleVisitator;
-import com.sikorasoftware.webmail.common.exception.exception.ValidationException;
+import com.sikorasoftware.webmail.common.component.textfield.TextFieldVisitatorEngine;
+import com.sikorasoftware.webmail.common.component.textfield.ValidationVisibleVisitator;
+import com.sikorasoftware.webmail.common.exception.ValidationException;
 import com.sikorasoftware.webmail.mvp.AbstractPresenter;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup;
@@ -42,7 +42,7 @@ public class AccountPresenter extends AbstractPresenter<AccountView> implements 
     }
 
     private void loadTabs() {
-        final List<Account> accountList = accountService.getAllAcounts();
+        final List<Account> accountList = accountService.getAllAccounts();
         view.removeAllTabs();
         accountList.forEach(account -> view.addTab(account.getName(), account, false));
     }

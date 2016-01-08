@@ -1,19 +1,27 @@
 package com.sikorasoftware.webmail.account;
 
+import org.bson.types.ObjectId;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
  * Created by robertsikora on 04.01.2016.
  */
+
+@Document(collection = Account.COLLECTION_NAME)
 public final class Account implements Serializable {
 
+    final static String COLLECTION_NAME = "accounts";
+
     @Id
-    private String id;
+    private ObjectId id;
     @NotBlank
     private String name;
     @NotBlank
@@ -25,13 +33,16 @@ public final class Account implements Serializable {
     private String imapHost;
     @NotBlank
     private String imapPort;
+
     private Boolean imapSSL;
 
-    public String getId() {
+    private List<ObjectId> messages = new ArrayList<>();
+
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
@@ -112,5 +123,13 @@ public final class Account implements Serializable {
                 ", imapPort='" + imapPort + '\'' +
                 ", imapSSL=" + imapSSL +
                 '}';
+    }
+
+    public List<ObjectId> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<ObjectId> messages) {
+        this.messages = messages;
     }
 }

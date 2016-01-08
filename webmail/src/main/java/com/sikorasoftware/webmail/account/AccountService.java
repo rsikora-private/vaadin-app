@@ -1,5 +1,6 @@
 package com.sikorasoftware.webmail.account;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
@@ -15,7 +16,7 @@ public class AccountService {
 
     private AccountRepository accountRepository;
 
-    public List<Account> getAllAcounts(){
+    public List<Account> getAllAccounts(){
         final List<Account> collection = new ArrayList<>();
         accountRepository.findAll().forEach(collection::add);
         return collection;
@@ -27,7 +28,7 @@ public class AccountService {
         accountRepository.save(account);
     }
 
-    public void delete(final String accountId){
+    public void delete(final ObjectId accountId){
 
         accountRepository.delete(accountId);
     }

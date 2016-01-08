@@ -16,6 +16,7 @@ public class MailMessageCreator {
 
         final StringBuilder from = new StringBuilder();
         final Address[] addressesIn = message.getFrom();
+
         for (Address address : addressesIn) {
             if(from.length() > 0){
                 from.append(";");

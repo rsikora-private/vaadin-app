@@ -1,4 +1,4 @@
-package com.sikorasoftware.webmail.common.exception.exception;
+package com.sikorasoftware.webmail.common.exception;
 
 /**
  * Created by robertsikora on 06.01.2016.

@@ -25,7 +25,7 @@ public class MailProcessor implements Processor {
 
         final com.sikorasoftware.webmail.inbox.MailMessage mailMessage = mailMessageCreator.createMessage(originalJavaxMailMessage);
 
-        inboxService.saveMessage(mailMessage);
+        inboxService.saveMessageForDefaultAccount(mailMessage);
 
         LOGGER.info("Save a new mail message: {}", mailMessage.toString());
     }
