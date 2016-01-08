@@ -2,10 +2,14 @@ package com.sikorasoftware.webmail.view.inbox;
 
 import com.sikorasoftware.webmail.account.Account;
 import com.sikorasoftware.webmail.account.AccountService;
+import com.sikorasoftware.webmail.common.component.table.MailTable;
 import com.sikorasoftware.webmail.inbox.InboxService;
+import com.sikorasoftware.webmail.inbox.MailMessage;
 import com.sikorasoftware.webmail.mvp.AbstractPresenter;
+import com.vaadin.data.Property;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Field;
 import com.vaadin.ui.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.spring.annotation.VaadinComponent;
@@ -31,6 +35,7 @@ public class InboxPresenter extends AbstractPresenter<InboxView> implements Seri
     protected void bind() {
         view.getReceiveButton().addClickListener(receiveMessages());
         onStart();
+        view.getMailTable().addValueChangeListener(selectMessage());
     }
 
     private void onStart() {
@@ -44,9 +49,20 @@ public class InboxPresenter extends AbstractPresenter<InboxView> implements Seri
     private Button.ClickListener receiveMessages(){
         return event -> {
             Notification.show("starting ...");
-
-
             Notification.show("ending ...");
+        };
+    }
+
+    private Property.ValueChangeListener selectMessage(){
+        return event -> {
+            final Field.ValueChangeEvent valueChangeEvent = (Field.ValueChangeEvent) event;
+
+            if(valueChangeEvent != null) {
+                final MailMessage mailMessage = (MailMessage) ((MailTable) valueChangeEvent.getSource()).getValue();
+                if(mailMessage != null) {
+                    view.getMailTextarea().setContent(mailMessage.getContent());
+                }
+            }
         };
     }
 

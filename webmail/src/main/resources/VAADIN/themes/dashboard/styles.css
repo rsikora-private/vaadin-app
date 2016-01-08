@@ -881,10 +881,10 @@
 /**
  * Outputs the selectors and properties for the TextArea component.
  *
- * @param {string} $primary-stylename (v-textarea) - the primary style name for the selectors
+ * @param {string} $primary-stylename (v-MailTextarea) - the primary style name for the selectors
  * @param {bool} $include-additional-styles - should the mixin output all the different style variations of the component
  *
- * @group textarea
+ * @group MailTextarea
  */
 
 /**

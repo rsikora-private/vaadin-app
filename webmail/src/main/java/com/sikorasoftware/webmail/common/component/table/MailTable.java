@@ -10,7 +10,7 @@ import com.vaadin.ui.themes.ValoTheme;
  */
 public class MailTable extends Table {
 
-    public MailTable(final BeanItemContainer<MailMessage> dataSet, final String[] columns, final String[] headers, final String sortProperty){
+    public MailTable(){
 
         setSizeFull();
         addStyleName(ValoTheme.TABLE_BORDERLESS);
@@ -20,16 +20,27 @@ public class MailTable extends Table {
 
         setColumnCollapsingAllowed(true);
         setColumnReorderingAllowed(true);
-        setContainerDataSource(dataSet);
-        setSortContainerPropertyId(sortProperty);
-        setSortAscending(false);
-
-        setVisibleColumns(columns);
-        setColumnHeaders(headers);
 
         setDragMode(TableDragMode.MULTIROW);
         setMultiSelect(false);
 
         setImmediate(true);
+    }
+
+    public void setDataSet(final BeanItemContainer<MailMessage> dataSet){
+        super.setContainerDataSource(dataSet);
+    }
+
+    public void setVisibleColumns(final String[] columns){
+        super.setVisibleColumns(columns);
+    }
+
+    public void setColumnHeaders(final String[] headers){
+        super.setColumnHeaders(headers);
+    }
+
+    public void setSortProperty(final String sortProperty, final boolean isAsc){
+        super.setSortContainerPropertyId(sortProperty);
+        super.setSortAscending(isAsc);
     }
 }

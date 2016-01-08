@@ -1,5 +1,6 @@
 package com.sikorasoftware.webmail.view.inbox;
 
+import com.sikorasoftware.webmail.common.component.textarea.MailTextarea;
 import com.sikorasoftware.webmail.inbox.MailMessage;
 import com.sikorasoftware.webmail.mvp.ViewManager;
 import com.sikorasoftware.webmail.common.component.table.MailTable;
@@ -28,16 +29,23 @@ public class InboxView extends Panel implements View, Serializable {
     private final static String[] COLUMNS = {FROM_PROPERTY, SUBJECT_PROPERTY, DATE_PROPERTY};
     private final static String[] HEADERS = {"Od", "Temat", "Data"};
 
-    private final TabSheet     tabSheet = new TabSheet();
+    private final TabSheet          tabSheet = new TabSheet();
     {
         tabSheet.setSizeFull();
     }
 
-    private final Button receiveButton = new Button("Receive post");
+    private final Button            receiveButton = new Button("Receive post");
     {
         getReceiveButton().addStyleName(ValoTheme.BUTTON_PRIMARY);
         getReceiveButton().addStyleName(ValoTheme.BUTTON_SMALL);
     }
+
+    private final MailTable         mailTable = new MailTable();
+    private final MailTextarea      mailTextarea = new MailTextarea();
+    {
+        mailTextarea.setSizeUndefined();
+    }
+
 
     @Autowired
     private ViewManager viewManager;
@@ -68,7 +76,7 @@ public class InboxView extends Panel implements View, Serializable {
         tabSheet.addStyleName(ValoTheme.TABSHEET_PADDED_TABBAR);
 
         verticalSplitPanel.setFirstComponent(tabSheet);
-        verticalSplitPanel.setSecondComponent(new Label("nothing to show"));
+        verticalSplitPanel.setSecondComponent(mailTextarea);
 
         setSizeFull();
         setContent(verticalSplitPanel);
@@ -80,6 +88,19 @@ public class InboxView extends Panel implements View, Serializable {
 
     public void loadMailsTab(final List<MailMessage> mails, final String accountName){
 
-        tabSheet.addTab(new MailTable(gridDataSetSupplier.getDataSet(mails), COLUMNS, HEADERS, DATE_PROPERTY), accountName);
+        mailTable.setDataSet(gridDataSetSupplier.getDataSet(mails));
+        mailTable.setVisibleColumns(COLUMNS);
+        mailTable.setColumnHeaders(HEADERS);
+        mailTable.setSortProperty(DATE_PROPERTY, false);
+
+        tabSheet.addTab(mailTable, accountName);
+    }
+
+    public MailTable getMailTable() {
+        return mailTable;
+    }
+
+    public MailTextarea getMailTextarea() {
+        return mailTextarea;
     }
 }
