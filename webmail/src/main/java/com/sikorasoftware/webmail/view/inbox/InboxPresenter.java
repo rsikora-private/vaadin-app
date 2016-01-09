@@ -56,14 +56,21 @@ public class InboxPresenter extends AbstractPresenter<InboxView> implements Seri
     private Property.ValueChangeListener selectMessage(){
         return event -> {
             final Field.ValueChangeEvent valueChangeEvent = (Field.ValueChangeEvent) event;
-
             if(valueChangeEvent != null) {
                 final MailMessage mailMessage = (MailMessage) ((MailTable) valueChangeEvent.getSource()).getValue();
                 if(mailMessage != null) {
+                    markAsRed(mailMessage);
+                    view.getMailTable().refreshCells();
                     view.getMailTextarea().setContent(mailMessage.getContent());
                 }
             }
         };
     }
 
+    private void markAsRed(final MailMessage mailMessage){
+        if(mailMessage.isUnread()) {
+            mailMessage.setUnread(false);
+            inboxService.saveMessage(mailMessage);
+        }
+    }
 }

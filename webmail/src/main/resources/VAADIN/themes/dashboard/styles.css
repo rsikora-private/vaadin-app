@@ -11780,10 +11780,7 @@ div.v-layout.v-horizontal.v-widget {
 	left: 60%;
 }
 
-
 /* my styles !!! */
-
-
 .v-grid-row:hover {
 	background-color: #f5f5f5
 }
@@ -11791,12 +11788,8 @@ div.v-layout.v-horizontal.v-widget {
 .v-table-body {
 	font-size: 10px;
 }
-/*
-.v-splitpanel-first-container .v-scrollable {
-	overflow: hidden;
-}
 
-.v-table .v-scrollable {
-	overflow: auto;
+.v-table-row-unread {
+	font-size: 12px;
+	font-weight: 600;
 }
-*/

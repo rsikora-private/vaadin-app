@@ -10,6 +10,8 @@ import com.vaadin.ui.themes.ValoTheme;
  */
 public class MailTable extends Table {
 
+    private final static String STYLE_NAME = "unread";
+
     public MailTable(){
 
         setSizeFull();
@@ -25,6 +27,8 @@ public class MailTable extends Table {
         setMultiSelect(false);
 
         setImmediate(true);
+
+        refreshCells();
     }
 
     public void setDataSet(final BeanItemContainer<MailMessage> dataSet){
@@ -42,5 +46,18 @@ public class MailTable extends Table {
     public void setSortProperty(final String sortProperty, final boolean isAsc){
         super.setSortContainerPropertyId(sortProperty);
         super.setSortAscending(isAsc);
+    }
+
+    public void refreshCells(){
+
+       // enableContentRefreshing(true);
+
+        setCellStyleGenerator((CellStyleGenerator) (source, itemId, propertyId) -> {
+            final MailMessage mailMessage = (MailMessage) itemId;
+            if(mailMessage.isUnread()) {
+                return STYLE_NAME;
+            }
+            return null;
+        });
     }
 }

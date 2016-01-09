@@ -7,7 +7,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -16,7 +18,6 @@ import java.util.Objects;
 
 @Document(collection = MailMessage.COLLECTION_NAME)
 public final class MailMessage implements Serializable {
-
     final static String COLLECTION_NAME = "mails";
 
     @Id
@@ -30,55 +31,16 @@ public final class MailMessage implements Serializable {
 
     private String subject;
 
-    private String content;
+    @NotNull
+    private Boolean unread = Boolean.TRUE;
 
-    public MailMessage(final String from, final Date sentDate, final String subject, final String content) {
+    private List<MailContent> content = new ArrayList<>();
+
+    public MailMessage(final String from, final Date sentDate, final String subject, List<MailContent> content) {
         this.setFrom(from);
         this.sentDate = sentDate;
         this.setSubject(subject);
         this.content = content;
-    }
-
-    public String getFrom() {
-        return from;
-    }
-
-    public Date getSentDate() {
-        return sentDate;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MailMessage that = (MailMessage) o;
-        return Objects.equals(from, that.from) &&
-                Objects.equals(sentDate, that.sentDate) &&
-                Objects.equals(subject, that.subject) &&
-                Objects.equals(content, that.content);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(from, sentDate, subject, content);
-    }
-
-    @Override
-    public String toString() {
-        String sb = "MailMessage{" + "from='" + from + '\'' +
-                ", sentDate=" + sentDate +
-                ", subject='" + subject + '\'' +
-                ", content='" + content + '\'' +
-                '}';
-        return sb;
     }
 
     public ObjectId getId() {
@@ -95,5 +57,61 @@ public final class MailMessage implements Serializable {
 
     public void setSubject(String subject) {
         this.subject = subject;
+    }
+
+    public Boolean isUnread() {
+        return unread;
+    }
+
+    public void setUnread(Boolean unread) {
+        this.unread = unread;
+    }
+
+    public String getFrom() {
+        return from;
+    }
+
+    public Date getSentDate() {
+        return sentDate;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public List<MailContent> getContent() {
+        return content;
+    }
+
+    public void setContent(List<MailContent> content){
+        this.content = content;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MailMessage that = (MailMessage) o;
+        return Objects.equals(from, that.from) &&
+                Objects.equals(sentDate, that.sentDate) &&
+                Objects.equals(subject, that.subject) &&
+                Objects.equals(content, that.content) &&
+                Objects.equals(unread, that.unread);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(from, sentDate, subject, content, unread);
+    }
+
+    @Override
+    public String toString() {
+        String sb = "MailMessage{" + "from='" + from + '\'' +
+                ", sentDate=" + sentDate +
+                ", subject='" + subject + '\'' +
+                ", content='" + content + '\'' +
+                ", unread='" + unread + '\'' +
+                '}';
+        return sb;
     }
 }
