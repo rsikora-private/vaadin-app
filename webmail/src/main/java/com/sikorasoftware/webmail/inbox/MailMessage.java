@@ -36,10 +36,22 @@ public final class MailMessage implements Serializable {
 
     private List<MailContent> content = new ArrayList<>();
 
-    public MailMessage(final String from, final Date sentDate, final String subject, List<MailContent> content) {
+    public MailMessage(){
+    }
+
+    public MailMessage(final String from, final Date sentDate, final String subject, final List<MailContent> content) {
         this.setFrom(from);
         this.sentDate = sentDate;
         this.setSubject(subject);
+        this.content = content;
+    }
+
+    public MailMessage(final ObjectId id, final String from, final Date sentDate, final String subject, final Boolean unread, final List<MailContent> content) {
+        this.id = id;
+        this.from = from;
+        this.sentDate = sentDate;
+        this.subject = subject;
+        this.unread = unread;
         this.content = content;
     }
 

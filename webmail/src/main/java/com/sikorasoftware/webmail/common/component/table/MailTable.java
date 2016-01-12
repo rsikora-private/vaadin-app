@@ -26,13 +26,23 @@ public class MailTable extends Table {
         setDragMode(TableDragMode.MULTIROW);
         setMultiSelect(false);
 
-        setImmediate(true);
+        setCellStyleGenerator((CellStyleGenerator) (source, itemId, propertyId) -> {
+            final MailMessage mailMessage = (MailMessage) itemId;
+            if(mailMessage.isUnread()) {
+                return STYLE_NAME;
+            }
+            return null;
+        });
 
-        refreshCells();
+        setImmediate(true);
     }
 
     public void setDataSet(final BeanItemContainer<MailMessage> dataSet){
-        super.setContainerDataSource(dataSet);
+        setContainerDataSource(dataSet);
+    }
+
+    public BeanItemContainer getDataSet(){
+        return (BeanItemContainer) super.getContainerDataSource();
     }
 
     public void setVisibleColumns(final String[] columns){
@@ -44,20 +54,7 @@ public class MailTable extends Table {
     }
 
     public void setSortProperty(final String sortProperty, final boolean isAsc){
-        super.setSortContainerPropertyId(sortProperty);
-        super.setSortAscending(isAsc);
-    }
-
-    public void refreshCells(){
-
-       // enableContentRefreshing(true);
-
-        setCellStyleGenerator((CellStyleGenerator) (source, itemId, propertyId) -> {
-            final MailMessage mailMessage = (MailMessage) itemId;
-            if(mailMessage.isUnread()) {
-                return STYLE_NAME;
-            }
-            return null;
-        });
+        setSortContainerPropertyId(sortProperty);
+        setSortAscending(isAsc);
     }
 }

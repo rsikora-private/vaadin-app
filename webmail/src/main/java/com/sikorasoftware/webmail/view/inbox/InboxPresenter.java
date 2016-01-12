@@ -2,7 +2,6 @@ package com.sikorasoftware.webmail.view.inbox;
 
 import com.sikorasoftware.webmail.account.Account;
 import com.sikorasoftware.webmail.account.AccountService;
-import com.sikorasoftware.webmail.common.component.table.MailTable;
 import com.sikorasoftware.webmail.inbox.InboxService;
 import com.sikorasoftware.webmail.inbox.MailMessage;
 import com.sikorasoftware.webmail.mvp.AbstractPresenter;
@@ -57,11 +56,24 @@ public class InboxPresenter extends AbstractPresenter<InboxView> implements Seri
         return event -> {
             final Field.ValueChangeEvent valueChangeEvent = (Field.ValueChangeEvent) event;
             if(valueChangeEvent != null) {
-                final MailMessage mailMessage = (MailMessage) ((MailTable) valueChangeEvent.getSource()).getValue();
-                if(mailMessage != null) {
-                    markAsRed(mailMessage);
-                    view.getMailTable().refreshCells();
-                    view.getMailTextarea().setContent(mailMessage.getContent());
+                final MailMessage originalMailMessage = (MailMessage) view.getMailTable().getValue();
+                if(originalMailMessage != null) {
+
+                    int index = view.getMailTable().getDataSet().indexOfId(originalMailMessage);
+                    view.getMailTable().getDataSet().removeItem(originalMailMessage);
+                    MailMessage ms = new MailMessage(
+                            originalMailMessage.getId(),
+                            originalMailMessage.getFrom(),
+                            originalMailMessage.getSentDate(),
+                            originalMailMessage.getSubject(),
+                            false,
+                            originalMailMessage.getContent());
+
+                    view.getMailTable().getDataSet().addItemAt(index, ms);
+
+                    markAsRed(originalMailMessage);
+
+                    view.getMailTextarea().setContent(ms.getContent());
                 }
             }
         };
