@@ -10,6 +10,7 @@ import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 
 import javax.annotation.PostConstruct;
 import java.io.Serializable;
@@ -39,7 +40,7 @@ public class InboxView extends Panel implements View, Serializable {
         getReceiveButton().addStyleName(ValoTheme.BUTTON_PRIMARY);
         getReceiveButton().addStyleName(ValoTheme.BUTTON_SMALL);
     }
-    private final MailTable         mailTable = new MailTable();
+
     private final MailTextarea      mailTextarea = new MailTextarea();
     {
         mailTextarea.setSizeUndefined();
@@ -81,18 +82,21 @@ public class InboxView extends Panel implements View, Serializable {
         return receiveButton;
     }
 
-    public void loadMailsTab(final List<MailMessage> mails, final String accountName){
+    public TabSheet.Tab loadMailsTab(final List<MailMessage> mails, final String accountName){
+        Assert.notNull(mails);
+        Assert.hasText(accountName);
 
+        final MailTable mailTable = new MailTable();
         mailTable.setDataSet(gridDataSetSupplier.getDataSet(mails));
         mailTable.setVisibleColumns(COLUMNS);
         mailTable.setColumnHeaders(HEADERS);
         mailTable.setSortProperty(DATE_PROPERTY, false);
 
-        tabSheet.addTab(mailTable, accountName);
+        return tabSheet.addTab(mailTable, accountName);
     }
 
     public MailTable getMailTable() {
-        return mailTable;
+        return (MailTable) tabSheet.getSelectedTab();
     }
 
     public MailTextarea getMailTextarea() {

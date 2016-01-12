@@ -5,24 +5,29 @@ import com.sikorasoftware.webmail.common.component.textfield.LengthVisitator;
 import com.sikorasoftware.webmail.common.component.textfield.NullRepresentationVisitator;
 import com.sikorasoftware.webmail.common.component.textfield.TextFieldVisitatorEngine;
 import com.sikorasoftware.webmail.common.component.textfield.ValidationVisibleVisitator;
-import com.sun.tools.javac.util.List;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import org.springframework.util.StringUtils;
 
+import java.io.Serializable;
+import java.util.List;
+
 /**
  * Created by robertsikora on 12.01.2016.
  */
-public class BoxForm extends HorizontalLayout {
+public class BoxForm extends HorizontalLayout implements Serializable {
 
     private final static int FIELD_LENGTH = 20;
+
+    private List<Box> boxList;
 
     private final ListSelect boxes = new ListSelect("Available boxes");
     {
         boxes.setRows(5);
-        boxes.setWidth(80, Unit.PERCENTAGE);
+        boxes.setWidth(90, Unit.PERCENTAGE);
         boxes.setNullSelectionAllowed(false);
         boxes.setImmediate(true);
+
     }
     private final TextField boxNameTextField = new TextField();
     private final Button addButton = new Button("Add");
@@ -30,9 +35,10 @@ public class BoxForm extends HorizontalLayout {
         addButton.addStyleName(ValoTheme.BUTTON_PRIMARY);
     }
 
-    private int selectNum = 0;
+    public BoxForm(final List<Box> boxList){
 
-    public BoxForm(){
+        this.boxList = boxList;
+        boxes.addItems(boxList);
 
         TextFieldVisitatorEngine.visit(this,
                 new NullRepresentationVisitator(),
@@ -54,15 +60,13 @@ public class BoxForm extends HorizontalLayout {
         return event -> {
             final String value = boxNameTextField.getValue();
             if(!StringUtils.isEmpty(value)) {
-                boxes.addItem(selectNum);
-                boxes.setItemCaption(selectNum, value);
+
+                final Box newBox = new Box(value);
+                boxList.add(newBox);
+                boxes.addItems(boxList);
+
                 boxNameTextField.clear();
-                selectNum++;
             }
         };
-    }
-
-    public List<Box> getBoxes(){
-        return (List<Box>) boxes.getItemIds();
     }
 }

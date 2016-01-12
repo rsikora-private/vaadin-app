@@ -79,7 +79,7 @@ public class AccountView extends FormLayout implements View, Serializable {
     public void addTab(final String tabCaption, final Account account, boolean selectTab){
 
         final AccountForm accountForm = new AccountForm();
-        final BoxForm boxForm = new BoxForm();
+        final BoxForm boxForm = new BoxForm(account.getBoxes());
 
         final VerticalLayout verticalLayout = new VerticalLayout();
 
@@ -90,8 +90,6 @@ public class AccountView extends FormLayout implements View, Serializable {
         Panel boxPanel = new Panel();
         boxPanel.setCaption("Boxes");
         boxPanel.setContent(boxForm);
-
-       // account.setBoxes(boxForm.getBoxes());
 
         verticalLayout.addComponents(accountPanel, boxPanel);
 
@@ -111,7 +109,7 @@ public class AccountView extends FormLayout implements View, Serializable {
     }
 
     public AccountForm getSelectedAccountForm(){
-        return (AccountForm) tabSheet.getSelectedTab();
+        return (AccountForm) ((Panel)((VerticalLayout) tabSheet.getSelectedTab()).getComponent(0)).getContent();
     }
 
     public Button getAddNewButton() {

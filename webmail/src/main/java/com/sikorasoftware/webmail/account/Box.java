@@ -45,9 +45,6 @@ public class Box implements Serializable {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Box{");
-        sb.append("name='").append(name).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return name;
     }
 }
