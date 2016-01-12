@@ -38,6 +38,8 @@ public final class Account implements Serializable {
 
     private List<ObjectId> messages = new ArrayList<>();
 
+    private List<Box> boxes = new ArrayList<>();
+
     public ObjectId getId() {
         return id;
     }
@@ -94,6 +96,22 @@ public final class Account implements Serializable {
         this.imapSSL = imapSSL;
     }
 
+    public List<ObjectId> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<ObjectId> messages) {
+        this.messages = messages;
+    }
+
+    public List<Box> getBoxes() {
+        return boxes;
+    }
+
+    public void setBoxes(List<Box> boxes) {
+        this.boxes = boxes;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -123,13 +141,5 @@ public final class Account implements Serializable {
                 ", imapPort='" + imapPort + '\'' +
                 ", imapSSL=" + imapSSL +
                 '}';
-    }
-
-    public List<ObjectId> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<ObjectId> messages) {
-        this.messages = messages;
     }
 }

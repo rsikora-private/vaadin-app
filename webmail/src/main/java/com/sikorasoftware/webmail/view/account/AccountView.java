@@ -37,7 +37,6 @@ public class AccountView extends FormLayout implements View, Serializable {
     private final TabSheet        tabSheet = new TabSheet();
     {
         tabSheet.setHeight(500, Unit.PIXELS);
-        tabSheet.addStyleName(ValoTheme.TABSHEET_FRAMED);
         tabSheet.addStyleName(ValoTheme.TABSHEET_PADDED_TABBAR);
     }
 
@@ -78,8 +77,25 @@ public class AccountView extends FormLayout implements View, Serializable {
     }
 
     public void addTab(final String tabCaption, final Account account, boolean selectTab){
+
         final AccountForm accountForm = new AccountForm();
-        final TabSheet.Tab tab = tabSheet.addTab(accountForm, tabCaption);
+        final BoxForm boxForm = new BoxForm();
+
+        final VerticalLayout verticalLayout = new VerticalLayout();
+
+        Panel accountPanel = new Panel();
+        accountPanel.setCaption("Server settings");
+        accountPanel.setContent(accountForm);
+
+        Panel boxPanel = new Panel();
+        boxPanel.setCaption("Boxes");
+        boxPanel.setContent(boxForm);
+
+       // account.setBoxes(boxForm.getBoxes());
+
+        verticalLayout.addComponents(accountPanel, boxPanel);
+
+        final TabSheet.Tab tab = tabSheet.addTab(verticalLayout, tabCaption);
         if(selectTab) {
             tabSheet.setSelectedTab(tab);
         }

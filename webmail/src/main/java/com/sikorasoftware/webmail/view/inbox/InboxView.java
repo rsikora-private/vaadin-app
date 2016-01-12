@@ -32,20 +32,18 @@ public class InboxView extends Panel implements View, Serializable {
     private final TabSheet          tabSheet = new TabSheet();
     {
         tabSheet.setSizeFull();
+        tabSheet.addStyleName(ValoTheme.TABSHEET_PADDED_TABBAR);
     }
-
     private final Button            receiveButton = new Button("Receive post");
     {
         getReceiveButton().addStyleName(ValoTheme.BUTTON_PRIMARY);
         getReceiveButton().addStyleName(ValoTheme.BUTTON_SMALL);
     }
-
     private final MailTable         mailTable = new MailTable();
     private final MailTextarea      mailTextarea = new MailTextarea();
     {
         mailTextarea.setSizeUndefined();
     }
-
 
     @Autowired
     private ViewManager viewManager;
@@ -71,9 +69,6 @@ public class InboxView extends Panel implements View, Serializable {
         final VerticalSplitPanel verticalSplitPanel = new VerticalSplitPanel();
         verticalSplitPanel.setSizeFull();
         verticalSplitPanel.setSplitPosition(40, Unit.PERCENTAGE);
-
-        tabSheet.addStyleName(ValoTheme.TABSHEET_FRAMED);
-        tabSheet.addStyleName(ValoTheme.TABSHEET_PADDED_TABBAR);
 
         verticalSplitPanel.setFirstComponent(tabSheet);
         verticalSplitPanel.setSecondComponent(mailTextarea);
