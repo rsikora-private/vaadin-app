@@ -5,9 +5,14 @@ package com.sikorasoftware.webmail.login;
  */
 public class LoginService {
 
-    public void login(final String username, final String password){
-        if(!"admin".equals(username) && !"admin".equals(password)){
-            throw new BadCredentialException("Bad credential");
+    private final static LOGIN, PASSWORD = "admin";
+
+    public void login(final String username, final String password) {
+
+        if(!LOGIN.equals(username)
+                && !PASSWORD.equals(password)){
+
+            throw new BadCredentialException("Bad credential.");
         }
     }
 }

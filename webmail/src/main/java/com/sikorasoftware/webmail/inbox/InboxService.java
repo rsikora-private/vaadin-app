@@ -30,7 +30,7 @@ public class InboxService {
         final Account account = defaultAccount.get();
         Assert.notNull(account, "Account must exist here...something went wrong");
 
-        account.getMessages().add(dbMessage.getId()); //on failure rolback here ???
+        account.getMessages().add(dbMessage.getId()); //on failure rollback here ???
         //single transaction
         accountService.save(account);
     }

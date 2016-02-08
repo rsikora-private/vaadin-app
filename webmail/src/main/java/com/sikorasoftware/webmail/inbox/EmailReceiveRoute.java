@@ -34,8 +34,6 @@ public class EmailReceiveRoute extends SpringRouteBuilder {
         final Optional<Account> accountOptional = accountService.getDefaultAccount();
         if(accountOptional.isPresent()) {
 
-            configureSslForImapProtocol();
-
             final Account account = accountOptional.get();
             final String uri = buildImapUri(account);
 
@@ -61,9 +59,6 @@ public class EmailReceiveRoute extends SpringRouteBuilder {
                + "&mapMailMessage=false";
             //   + "&delete=false"
             //   + "&unseen=true";
-    }
-
-    private void configureSslForImapProtocol(){
     }
 
     public void setAccountService(final AccountService accountService) {

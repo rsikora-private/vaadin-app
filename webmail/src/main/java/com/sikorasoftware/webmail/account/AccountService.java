@@ -23,13 +23,13 @@ public class AccountService {
     }
 
     public void save(final Account account){
-        Assert.notNull(account, "Account is required");
+        Assert.notNull(account, "Account is required.");
 
         accountRepository.save(account);
     }
 
     public void delete(final ObjectId accountId){
-        Assert.notNull(accountId, "ObjectId is required");
+        Assert.notNull(accountId, "ObjectId is required.");
 
         accountRepository.delete(accountId);
     }
@@ -46,4 +46,5 @@ public class AccountService {
     public void setAccountRepository(final AccountRepository repository) {
         this.accountRepository = repository;
     }
+
 }
