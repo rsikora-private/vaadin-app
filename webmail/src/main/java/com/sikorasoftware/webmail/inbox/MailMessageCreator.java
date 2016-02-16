@@ -16,7 +16,7 @@ public class MailMessageCreator {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(MailMessageCreator.class);
 
-    public MailMessage createMessage(final Message message)
+    public Message createMessage(final javax.mail.Message message)
             throws MessagingException, IOException {
 
         final StringBuilder from = new StringBuilder();
@@ -30,7 +30,7 @@ public class MailMessageCreator {
         //due to javax.mail.MessagingException: Unable to load BODYSTRUCTURE
         final MimeMessage mimeMessageWrapper = new MimeMessage((MimeMessage) message);
 
-        final MailMessage mailMessage = new MailMessage(from.toString(), message.getSentDate(),
+        final Message mailMessage = new Message(from.toString(), message.getSentDate(),
                 message.getSubject(), getFinalContent(mimeMessageWrapper));
 
         return mailMessage;

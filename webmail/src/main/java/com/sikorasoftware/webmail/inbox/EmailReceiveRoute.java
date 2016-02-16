@@ -23,10 +23,10 @@ public class EmailReceiveRoute extends SpringRouteBuilder {
     private final static Logger LOGGER = LoggerFactory.getLogger(EmailReceiveRoute.class);
 
     private final static String RECEIVE_PROTOCOL = "imaps";
-    private final static int    RECEIVE_DELAY_IN_MINS    = 1 * 60_000;
+    private final static int    RECEIVE_DELAY_IN_MINS = 1 * 60_000;
 
-    private AccountService accountService;
-    private MailProcessor mailProcessor;
+    private AccountService      accountService;
+    private MailProcessor       mailProcessor;
 
     @Override
     public void configure() throws Exception {

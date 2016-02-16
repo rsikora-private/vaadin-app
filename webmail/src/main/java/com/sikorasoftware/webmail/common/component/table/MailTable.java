@@ -1,6 +1,6 @@
 package com.sikorasoftware.webmail.common.component.table;
 
-import com.sikorasoftware.webmail.inbox.MailMessage;
+import com.sikorasoftware.webmail.inbox.Message;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.ValoTheme;
@@ -27,7 +27,7 @@ public class MailTable extends Table {
         setMultiSelect(false);
 
         setCellStyleGenerator((CellStyleGenerator) (source, itemId, propertyId) -> {
-            final MailMessage mailMessage = (MailMessage) itemId;
+            final Message mailMessage = (Message) itemId;
             if(mailMessage.isUnread()) {
                 return STYLE_NAME;
             }
@@ -37,7 +37,7 @@ public class MailTable extends Table {
         setImmediate(true);
     }
 
-    public void setDataSet(final BeanItemContainer<MailMessage> dataSet){
+    public void setDataSet(final BeanItemContainer<Message> dataSet){
         setContainerDataSource(dataSet);
     }
 

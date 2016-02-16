@@ -73,7 +73,7 @@ public class AccountPresenter extends AbstractPresenter<AccountView> implements 
             final Account selectedAccount = tabBinder.getItemDataSource().getBean();
 
             if(selectedAccount.getId() != null) {
-                accountService.delete(selectedAccount.getId());
+                accountService.deleteByObjectId(selectedAccount.getId());
             }
             loadTabs();
         };

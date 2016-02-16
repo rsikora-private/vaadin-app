@@ -14,8 +14,8 @@ public class MailProcessor implements Processor {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(MailProcessor.class);
 
-    private InboxService inboxService;
-    private MailMessageCreator mailMessageCreator;
+    private InboxService        inboxService;
+    private MailMessageCreator  mailMessageCreator;
 
     @Override
     public void process(final Exchange exchange) throws Exception {
@@ -23,7 +23,7 @@ public class MailProcessor implements Processor {
         final MailMessage in = (MailMessage)exchange.getIn();
         final Message originalJavaxMailMessage = in.getOriginalMessage();
 
-        final com.sikorasoftware.webmail.inbox.MailMessage mailMessage = mailMessageCreator.createMessage(originalJavaxMailMessage);
+        final com.sikorasoftware.webmail.inbox.Message mailMessage = mailMessageCreator.createMessage(originalJavaxMailMessage);
 
         inboxService.saveMessageForDefaultAccount(mailMessage);
 

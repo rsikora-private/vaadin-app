@@ -2,6 +2,9 @@ package com.sikorasoftware.webmail.view.account;
 
 import com.sikorasoftware.webmail.account.Account;
 import com.sikorasoftware.webmail.mvp.ViewManager;
+import com.sikorasoftware.webmail.view.account.form.AccountForm;
+import com.sikorasoftware.webmail.view.account.form.BoxForm;
+import com.sikorasoftware.webmail.view.account.form.RuleForm;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
@@ -80,18 +83,23 @@ public class AccountView extends FormLayout implements View, Serializable {
 
         final AccountForm accountForm = new AccountForm();
         final BoxForm boxForm = new BoxForm(account.getBoxes());
+        final RuleForm ruleForm = new RuleForm();
 
         final VerticalLayout verticalLayout = new VerticalLayout();
 
         Panel accountPanel = new Panel();
-        accountPanel.setCaption("Server settings");
+        accountPanel.setCaption("Settings");
         accountPanel.setContent(accountForm);
 
         Panel boxPanel = new Panel();
-        boxPanel.setCaption("Boxes");
+        boxPanel.setCaption("Mail boxes");
         boxPanel.setContent(boxForm);
 
-        verticalLayout.addComponents(accountPanel, boxPanel);
+        Panel rulePanel = new Panel();
+        rulePanel.setCaption("Rules");
+        rulePanel.setContent(ruleForm);
+
+        verticalLayout.addComponents(accountPanel, boxPanel, rulePanel);
 
         final TabSheet.Tab tab = tabSheet.addTab(verticalLayout, tabCaption);
         if(selectTab) {

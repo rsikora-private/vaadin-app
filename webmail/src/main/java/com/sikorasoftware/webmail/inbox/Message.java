@@ -16,8 +16,8 @@ import java.util.Objects;
  * Created by robertsikora on 06.01.2016.
  */
 
-@Document(collection = MailMessage.COLLECTION_NAME)
-public final class MailMessage implements Serializable {
+@Document(collection = Message.COLLECTION_NAME)
+public final class Message implements Serializable {
     final static String COLLECTION_NAME = "mails";
 
     @Id
@@ -36,17 +36,17 @@ public final class MailMessage implements Serializable {
 
     private List<MailContent> content = new ArrayList<>();
 
-    public MailMessage(){
+    public Message(){
     }
 
-    public MailMessage(final String from, final Date sentDate, final String subject, final List<MailContent> content) {
+    public Message(final String from, final Date sentDate, final String subject, final List<MailContent> content) {
         this.setFrom(from);
         this.sentDate = sentDate;
         this.setSubject(subject);
         this.content = content;
     }
 
-    public MailMessage(final ObjectId id, final String from, final Date sentDate, final String subject, final Boolean unread, final List<MailContent> content) {
+    public Message(final ObjectId id, final String from, final Date sentDate, final String subject, final Boolean unread, final List<MailContent> content) {
         this.id = id;
         this.from = from;
         this.sentDate = sentDate;
@@ -103,7 +103,7 @@ public final class MailMessage implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MailMessage that = (MailMessage) o;
+        Message that = (Message) o;
         return Objects.equals(from, that.from) &&
                 Objects.equals(sentDate, that.sentDate) &&
                 Objects.equals(subject, that.subject) &&
@@ -118,7 +118,7 @@ public final class MailMessage implements Serializable {
 
     @Override
     public String toString() {
-        String sb = "MailMessage{" + "from='" + from + '\'' +
+        String sb = "Message{" + "from='" + from + '\'' +
                 ", sentDate=" + sentDate +
                 ", subject='" + subject + '\'' +
                 ", content='" + content + '\'' +

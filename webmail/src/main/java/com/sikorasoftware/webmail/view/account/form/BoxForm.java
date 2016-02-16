@@ -1,4 +1,4 @@
-package com.sikorasoftware.webmail.view.account;
+package com.sikorasoftware.webmail.view.account.form;
 
 import com.sikorasoftware.webmail.account.Box;
 import com.sikorasoftware.webmail.common.component.textfield.LengthVisitator;

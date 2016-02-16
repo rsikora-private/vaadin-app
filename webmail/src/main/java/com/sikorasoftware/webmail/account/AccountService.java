@@ -28,7 +28,7 @@ public class AccountService {
         accountRepository.save(account);
     }
 
-    public void delete(final ObjectId accountId){
+    public void deleteByObjectId(final ObjectId accountId){
         Assert.notNull(accountId, "ObjectId is required.");
 
         accountRepository.delete(accountId);

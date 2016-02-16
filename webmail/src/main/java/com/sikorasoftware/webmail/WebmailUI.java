@@ -27,10 +27,10 @@ public class WebmailUI extends UI {
     private WebmailEventBus webmailEventBus;
 
     @Autowired
-    private LoginView loginView;
+    private LoginView       loginView;
 
     @Autowired
-    private MainView mainView;
+    private MainView        mainView;
 
     @Override
     protected void init(VaadinRequest request) {
@@ -46,6 +46,13 @@ public class WebmailUI extends UI {
     public void onSuccessLoginEvent(final WebmailEvent.SuccessLoginEvent event) {
         mainView.initializeNavigator();
         setContent(mainView);
+    }
+
+    @Subscribe
+    public void onLogOutEvent(final WebmailEvent.LoggedOutEvent event) {
+        setContent(loginView);
+
+        //mainView clear up ??
     }
 
     @PreDestroy

@@ -10,6 +10,9 @@ public abstract class WebmailEvent {
     public static final class SuccessLoginEvent {
     }
 
+    public static final class LoggedOutEvent {
+    }
+
     public static final class PostViewChangeEvent {
         private final ViewType view;
 

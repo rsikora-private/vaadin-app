@@ -1,7 +1,7 @@
 package com.sikorasoftware.webmail.view.inbox;
 
 import com.sikorasoftware.webmail.common.component.textarea.MailTextarea;
-import com.sikorasoftware.webmail.inbox.MailMessage;
+import com.sikorasoftware.webmail.inbox.Message;
 import com.sikorasoftware.webmail.mvp.ViewManager;
 import com.sikorasoftware.webmail.common.component.table.MailTable;
 import com.vaadin.navigator.View;
@@ -82,7 +82,7 @@ public class InboxView extends Panel implements View, Serializable {
         return receiveButton;
     }
 
-    public TabSheet.Tab loadMailsTab(final List<MailMessage> mails, final String accountName){
+    public TabSheet.Tab loadMailsTab(final List<Message> mails, final String accountName){
         Assert.notNull(mails);
         Assert.hasText(accountName);
 

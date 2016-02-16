@@ -17,9 +17,7 @@ import java.util.Objects;
 
 @Document(collection = Account.COLLECTION_NAME)
 public final class Account implements Serializable {
-
     final static String COLLECTION_NAME = "accounts";
-
     @Id
     private ObjectId id;
     @NotBlank
@@ -39,6 +37,8 @@ public final class Account implements Serializable {
     private List<ObjectId> messages = new ArrayList<>();
 
     private List<Box> boxes = new ArrayList<>();
+
+
 
     public ObjectId getId() {
         return id;

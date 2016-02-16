@@ -76,6 +76,9 @@ public final class WebmailMenu extends CustomComponent {
         MenuBar.MenuItem settingsItem = settings.addItem("", new ThemeResource(
                 "img/profile-pic-300px.jpg"), null);
         settingsItem.setText("admin");
+        settingsItem.addSeparator();
+        settingsItem.addItem("Sign Out", (MenuBar.Command) selectedItem
+                -> webmailEventBus.post(new WebmailEvent.LoggedOutEvent()));
         return settings;
     }
 

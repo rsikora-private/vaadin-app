@@ -4,7 +4,7 @@ import com.sikorasoftware.webmail.account.Account;
 import com.sikorasoftware.webmail.account.AccountService;
 import com.sikorasoftware.webmail.common.component.table.MailTable;
 import com.sikorasoftware.webmail.inbox.InboxService;
-import com.sikorasoftware.webmail.inbox.MailMessage;
+import com.sikorasoftware.webmail.inbox.Message;
 import com.sikorasoftware.webmail.mvp.AbstractPresenter;
 import com.vaadin.data.Property;
 import com.vaadin.spring.annotation.UIScope;
@@ -48,7 +48,7 @@ public class InboxPresenter extends AbstractPresenter<InboxView> implements Seri
             final List<TabSheet.Tab> addedTabs = new ArrayList<>();
 
             final Account account = accountOptional.get();
-            final List<MailMessage> messages = inboxService.getMessagesForDefaultAccount();
+            final List<Message> messages = inboxService.getMessagesForDefaultAccount();
             addedTabs.add(view.loadMailsTab(messages, account.getName()));
             account.getBoxes().forEach(box
                     -> addedTabs.add(view.loadMailsTab(messages, box.getName())));
@@ -68,12 +68,12 @@ public class InboxPresenter extends AbstractPresenter<InboxView> implements Seri
         return event -> {
             final Field.ValueChangeEvent valueChangeEvent = (Field.ValueChangeEvent) event;
             if(valueChangeEvent != null) {
-                final MailMessage originalMailMessage = (MailMessage) view.getMailTable().getValue();
+                final Message originalMailMessage = (Message) view.getMailTable().getValue();
                 if(originalMailMessage != null) {
 
                     int index = view.getMailTable().getDataSet().indexOfId(originalMailMessage);
                     view.getMailTable().getDataSet().removeItem(originalMailMessage);
-                    MailMessage ms = new MailMessage(
+                    Message ms = new Message(
                             originalMailMessage.getId(),
                             originalMailMessage.getFrom(),
                             originalMailMessage.getSentDate(),
@@ -91,7 +91,7 @@ public class InboxPresenter extends AbstractPresenter<InboxView> implements Seri
         };
     }
 
-    private void markAsRed(final MailMessage mailMessage){
+    private void markAsRed(final Message mailMessage){
         if(mailMessage.isUnread()) {
             mailMessage.setUnread(false);
             inboxService.saveMessage(mailMessage);
