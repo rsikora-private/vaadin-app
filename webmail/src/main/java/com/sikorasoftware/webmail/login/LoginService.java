@@ -5,7 +5,8 @@ package com.sikorasoftware.webmail.login;
  */
 public class LoginService {
 
-    private final static LOGIN, PASSWORD = "admin";
+    private final static String LOGIN    = "admin";
+    private final static String PASSWORD = "admin";
 
     public void login(final String username, final String password) {
 

@@ -1,0 +1,1 @@
+https://github.com/mswiderski/jbpm-examples/tree/master/jbpm-spring-web/src/main/java/org/jbpm/spring/domain
