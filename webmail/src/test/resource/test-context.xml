@@ -3,6 +3,11 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="loginService" class="com.sikorasoftware.webmail.login.LoginService"/>
+
+    <import resource="application-context.xml"/>
+
+    <bean id="emailContext" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg name="classToMock" value="org.apache.camel.CamelContext"/>
+    </bean>
 
 </beans>

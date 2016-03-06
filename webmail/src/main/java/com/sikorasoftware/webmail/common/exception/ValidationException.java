@@ -5,7 +5,7 @@ package com.sikorasoftware.webmail.common.exception;
  */
 public class ValidationException extends RuntimeException {
 
-    public ValidationException(final String message, final Throwable cause){
+    public ValidationException(final String message, final Throwable cause) {
         super(message, cause);
     }
 }

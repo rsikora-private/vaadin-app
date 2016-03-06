@@ -12,27 +12,23 @@ import java.util.List;
  */
 public class MailTextarea extends VerticalLayout {
 
-    public MailTextarea(){
-
+    public MailTextarea() {
         setSizeUndefined();
         setImmediate(true);
     }
 
-    public void setContent(final List<MailContent> content){
-
+    public void setContent(final List<MailContent> content) {
         removeAllComponents();
         content.forEach(t -> {
-
-                final Label label = new Label();
-                label.setValue(t.getContent());
-                if(MailContent.ContentType.TEXT == t.getContentType()){
-                    label.setContentMode(ContentMode.TEXT);
-                } else {
-                    label.setContentMode(ContentMode.HTML);
+                    final Label label = new Label();
+                    label.setValue(t.getContent());
+                    if (MailContent.ContentType.TEXT == t.getContentType()) {
+                        label.setContentMode(ContentMode.TEXT);
+                    } else {
+                        label.setContentMode(ContentMode.HTML);
+                    }
+                    addComponent(label);
                 }
-
-                addComponent(label);
-            }
         );
     }
 }

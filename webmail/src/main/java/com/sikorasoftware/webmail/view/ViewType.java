@@ -52,5 +52,4 @@ public enum ViewType {
         }
         return result;
     }
-
 }

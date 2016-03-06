@@ -39,7 +39,6 @@ public final class Account implements Serializable {
     private List<Box> boxes = new ArrayList<>();
 
 
-
     public ObjectId getId() {
         return id;
     }

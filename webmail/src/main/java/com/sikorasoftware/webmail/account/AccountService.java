@@ -16,27 +16,25 @@ public class AccountService {
 
     private AccountRepository accountRepository;
 
-    public List<Account> getAllAccounts(){
+    public List<Account> getAllAccounts() {
         final List<Account> collection = new ArrayList<>();
         accountRepository.findAll().forEach(collection::add);
         return collection;
     }
 
-    public void save(final Account account){
+    public void save(final Account account) {
         Assert.notNull(account, "Account is required.");
-
         accountRepository.save(account);
     }
 
-    public void deleteByObjectId(final ObjectId accountId){
+    public void deleteByObjectId(final ObjectId accountId) {
         Assert.notNull(accountId, "ObjectId is required.");
-
         accountRepository.delete(accountId);
     }
 
-    public Optional<Account> getDefaultAccount(){
+    public Optional<Account> getDefaultAccount() {
         final Iterator<Account> accountIterator = accountRepository.findAll().iterator();
-        if(accountIterator.hasNext()){
+        if (accountIterator.hasNext()) {
             return Optional.of(accountIterator.next());
         }
         return Optional.empty();

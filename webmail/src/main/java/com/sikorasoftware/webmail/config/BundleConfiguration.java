@@ -15,7 +15,7 @@ public class BundleConfiguration {
     public final static String APPLICATION_BUNDLE = "applicationBundle";
 
     @Bean(name = APPLICATION_BUNDLE)
-    public MessageSource createResourceBundleMessageSource(){
+    public MessageSource createResourceBundleMessageSource() {
         final ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setDefaultEncoding("UTF-8");
         messageSource.setBasenames("bundle.application");

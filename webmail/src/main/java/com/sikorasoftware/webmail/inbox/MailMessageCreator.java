@@ -18,52 +18,41 @@ public class MailMessageCreator {
 
     public Message createMessage(final javax.mail.Message message)
             throws MessagingException, IOException {
-
         final StringBuilder from = new StringBuilder();
         for (Address address : message.getFrom()) {
-            if(from.length() > 0){
+            if (from.length() > 0) {
                 from.append(";");
             }
             from.append(address.toString());
         }
-
         //due to javax.mail.MessagingException: Unable to load BODYSTRUCTURE
         final MimeMessage mimeMessageWrapper = new MimeMessage((MimeMessage) message);
-
-        final Message mailMessage = new Message(from.toString(), message.getSentDate(),
+        return new Message(from.toString(), message.getSentDate(),
                 message.getSubject(), getFinalContent(mimeMessageWrapper));
-
-        return mailMessage;
     }
 
     private List<MailContent> getFinalContent(final Part part) throws MessagingException,
             IOException {
-
         final List<MailContent> result = new ArrayList<>();
         final Object content = part.getContent();
-
         if (content instanceof String) {
-
             final String type = part.getContentType();
             result.add(new MailContent(content.toString(), resolveContentType(type)));
 
-        } else if (content instanceof Multipart){
-
+        } else if (content instanceof Multipart) {
             final Multipart mp = (Multipart) content;
-            for(int i = 0; i< mp.getCount(); i++){
-
+            for (int i = 0; i < mp.getCount(); i++) {
                 final BodyPart bodyPart = mp.getBodyPart(i);
                 result.addAll(getFinalContent(bodyPart));
             }
 
-        } else{
+        } else {
             LOGGER.warn("{} not supported yet !!!!!", content.getClass().toString());
         }
         return result;
     }
 
-    private MailContent.ContentType resolveContentType(final String contentType){
-
+    private MailContent.ContentType resolveContentType(final String contentType) {
         return contentType.contains("text/plain")
                 ? MailContent.ContentType.TEXT
                 : MailContent.ContentType.HTML;

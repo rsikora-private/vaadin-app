@@ -19,9 +19,10 @@ public class BoxForm extends HorizontalLayout implements Serializable {
 
     private final static int FIELD_LENGTH = 20;
 
-    private List<Box> boxList;
+    private final List<Box> boxList;
 
     private final ListSelect boxes = new ListSelect("Available boxes");
+
     {
         boxes.setRows(5);
         boxes.setWidth(90, Unit.PERCENTAGE);
@@ -29,42 +30,36 @@ public class BoxForm extends HorizontalLayout implements Serializable {
         boxes.setImmediate(true);
 
     }
+
     private final TextField boxNameTextField = new TextField();
     private final Button addButton = new Button("Add");
+
     {
         addButton.addStyleName(ValoTheme.BUTTON_PRIMARY);
     }
 
-    public BoxForm(final List<Box> boxList){
-
+    public BoxForm(final List<Box> boxList) {
         this.boxList = boxList;
         boxes.addItems(boxList);
-
         TextFieldVisitatorEngine.visit(this,
                 new NullRepresentationVisitator(),
                 new ValidationVisibleVisitator(false),
                 new LengthVisitator(FIELD_LENGTH));
-
         CssLayout group = new CssLayout(boxNameTextField, addButton);
         group.addStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
-
         addComponents(boxes, group);
-
         setSizeFull();
         setMargin(true);
-
         addButton.addClickListener(getButtonListener());
     }
 
-    private Button.ClickListener getButtonListener(){
+    private Button.ClickListener getButtonListener() {
         return event -> {
             final String value = boxNameTextField.getValue();
-            if(!StringUtils.isEmpty(value)) {
-
+            if (!StringUtils.isEmpty(value)) {
                 final Box newBox = new Box(value);
                 boxList.add(newBox);
                 boxes.addItems(boxList);
-
                 boxNameTextField.clear();
             }
         };

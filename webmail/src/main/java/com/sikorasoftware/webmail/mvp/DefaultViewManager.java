@@ -9,7 +9,7 @@ import org.springframework.util.StringUtils;
 
 /**
  * Created by robertsikora on 31.12.2015.
- *
+ * <p>
  * ViewManager that configure Presenters following
  * the naming convention XXView->XXPresenter
  */
@@ -21,9 +21,8 @@ public class DefaultViewManager implements ViewManager {
     private ApplicationContext applicationContext;
 
     @Override
-    public void configure(View view) {
-        Assert.notNull(view);
-
+    public void configure(final View view) {
+        Assert.notNull(view, "Passed view cannot be null.");
         final AbstractPresenter p = (AbstractPresenter) applicationContext.getBean(getPresenterName(view.getClass()));
         p.setView(view);
         p.bind();

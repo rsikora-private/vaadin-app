@@ -7,13 +7,13 @@
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
         <constructor-arg>
             <bean class="com.mongodb.MongoClient">
-                <constructor-arg value="localhost" />
-                <constructor-arg value="27017" />
+                <constructor-arg value="localhost"/>
+                <constructor-arg value="27017"/>
             </bean>
         </constructor-arg>
-        <constructor-arg value="webmail" />
+        <constructor-arg value="webmail"/>
     </bean>
 
-    <mongo:repositories base-package="com.sikorasoftware.webmail.account,com.sikorasoftware.webmail.inbox" />
+    <mongo:repositories base-package="com.sikorasoftware.webmail.account,com.sikorasoftware.webmail.inbox"/>
 
 </beans>

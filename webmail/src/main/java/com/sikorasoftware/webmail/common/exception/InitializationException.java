@@ -5,7 +5,7 @@ package com.sikorasoftware.webmail.common.exception;
  */
 public class InitializationException extends RuntimeException {
 
-    public InitializationException(final String message, final Throwable cause){
+    public InitializationException(final String message, final Throwable cause) {
         super(message, cause);
     }
 }

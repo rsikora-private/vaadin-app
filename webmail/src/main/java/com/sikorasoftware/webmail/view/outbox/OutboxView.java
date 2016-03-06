@@ -18,6 +18,5 @@ public class OutboxView extends FormLayout implements View, Serializable {
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event) {
-
     }
 }

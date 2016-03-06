@@ -37,7 +37,7 @@ public class AccountPresenter extends AbstractPresenter<AccountView> implements 
         onStart();
     }
 
-    private void onStart(){
+    private void onStart() {
         loadTabs();
     }
 
@@ -47,32 +47,29 @@ public class AccountPresenter extends AbstractPresenter<AccountView> implements 
         accountList.forEach(account -> view.addTab(account.getName(), account, false));
     }
 
-    private Button.ClickListener addNewAccount(){
+    private Button.ClickListener addNewAccount() {
         return event -> view.addTab(TAB_CAPTION, new Account(), true);
     }
 
-    private Button.ClickListener saveAccount(){
+    private Button.ClickListener saveAccount() {
         return event -> {
             final BeanFieldGroup<Account> tabBinder = view.getCurrentTabBinder();
             try {
-
                 TextFieldVisitatorEngine.visit(view.getSelectedAccountForm(), new ValidationVisibleVisitator(true));
                 tabBinder.commit();
             } catch (FieldGroup.CommitException e) {
                 throw new ValidationException("validation error", e);
             }
-
             accountService.save(tabBinder.getItemDataSource().getBean());
             loadTabs();
         };
     }
 
-    private Button.ClickListener deleteAccount(){
+    private Button.ClickListener deleteAccount() {
         return event -> {
             final BeanFieldGroup<Account> tabBinder = view.getCurrentTabBinder();
             final Account selectedAccount = tabBinder.getItemDataSource().getBean();
-
-            if(selectedAccount.getId() != null) {
+            if (selectedAccount.getId() != null) {
                 accountService.deleteByObjectId(selectedAccount.getId());
             }
             loadTabs();

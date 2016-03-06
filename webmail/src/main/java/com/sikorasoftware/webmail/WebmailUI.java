@@ -27,17 +27,15 @@ public class WebmailUI extends UI {
     private WebmailEventBus webmailEventBus;
 
     @Autowired
-    private LoginView       loginView;
+    private LoginView loginView;
 
     @Autowired
-    private MainView        mainView;
+    private MainView mainView;
 
     @Override
     protected void init(VaadinRequest request) {
-
         setLocale(Locale.ENGLISH);
         webmailEventBus.register(this);
-
         setContent(loginView);
         addStyleName(loginView.getStyle());
     }
@@ -51,12 +49,11 @@ public class WebmailUI extends UI {
     @Subscribe
     public void onLogOutEvent(final WebmailEvent.LoggedOutEvent event) {
         setContent(loginView);
-
         //mainView clear up ??
     }
 
     @PreDestroy
-    public void onDestroy(){
+    public void onDestroy() {
         webmailEventBus.unregister(this);
     }
 }

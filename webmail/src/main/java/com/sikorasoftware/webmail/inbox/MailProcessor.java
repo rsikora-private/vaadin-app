@@ -14,19 +14,15 @@ public class MailProcessor implements Processor {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(MailProcessor.class);
 
-    private InboxService        inboxService;
-    private MailMessageCreator  mailMessageCreator;
+    private InboxService inboxService;
+    private MailMessageCreator mailMessageCreator;
 
     @Override
     public void process(final Exchange exchange) throws Exception {
-
-        final MailMessage in = (MailMessage)exchange.getIn();
+        final MailMessage in = (MailMessage) exchange.getIn();
         final Message originalJavaxMailMessage = in.getOriginalMessage();
-
         final com.sikorasoftware.webmail.inbox.Message mailMessage = mailMessageCreator.createMessage(originalJavaxMailMessage);
-
         inboxService.saveMessageForDefaultAccount(mailMessage);
-
         LOGGER.info("Save a new mail message: {}", mailMessage.toString());
     }
 

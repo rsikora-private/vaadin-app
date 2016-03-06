@@ -41,36 +41,31 @@ public class InboxPresenter extends AbstractPresenter<InboxView> implements Seri
     }
 
     private void onStart() {
-
         final Optional<Account> accountOptional = accountService.getDefaultAccount();
-        if(accountOptional.isPresent()) {
-
+        if (accountOptional.isPresent()) {
             final List<TabSheet.Tab> addedTabs = new ArrayList<>();
-
             final Account account = accountOptional.get();
             final List<Message> messages = inboxService.getMessagesForDefaultAccount();
             addedTabs.add(view.loadMailsTab(messages, account.getName()));
             account.getBoxes().forEach(box
                     -> addedTabs.add(view.loadMailsTab(messages, box.getName())));
-
-            addedTabs.forEach(tab -> ((MailTable)tab.getComponent()).addValueChangeListener(selectMessage()));
+            addedTabs.forEach(tab -> ((MailTable) tab.getComponent()).addValueChangeListener(selectMessage()));
         }
     }
 
-    private Button.ClickListener receiveMessages(){
+    private Button.ClickListener receiveMessages() {
         return event -> {
             Notification.show("starting ...");
             Notification.show("ending ...");
         };
     }
 
-    private Property.ValueChangeListener selectMessage(){
+    private Property.ValueChangeListener selectMessage() {
         return event -> {
             final Field.ValueChangeEvent valueChangeEvent = (Field.ValueChangeEvent) event;
-            if(valueChangeEvent != null) {
+            if (valueChangeEvent != null) {
                 final Message originalMailMessage = (Message) view.getMailTable().getValue();
-                if(originalMailMessage != null) {
-
+                if (originalMailMessage != null) {
                     int index = view.getMailTable().getDataSet().indexOfId(originalMailMessage);
                     view.getMailTable().getDataSet().removeItem(originalMailMessage);
                     Message ms = new Message(
@@ -80,19 +75,16 @@ public class InboxPresenter extends AbstractPresenter<InboxView> implements Seri
                             originalMailMessage.getSubject(),
                             false,
                             originalMailMessage.getContent());
-
                     view.getMailTable().getDataSet().addItemAt(index, ms);
-
                     markAsRed(originalMailMessage);
-
                     view.getMailTextarea().setContent(ms.getContent());
                 }
             }
         };
     }
 
-    private void markAsRed(final Message mailMessage){
-        if(mailMessage.isUnread()) {
+    private void markAsRed(final Message mailMessage) {
+        if (mailMessage.isUnread()) {
             mailMessage.setUnread(false);
             inboxService.saveMessage(mailMessage);
         }

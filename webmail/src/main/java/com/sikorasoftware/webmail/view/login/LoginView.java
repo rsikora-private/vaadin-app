@@ -46,7 +46,6 @@ public class LoginView extends VerticalLayout implements View, Styleable {
 
     public LoginView() {
         setSizeFull();
-
         Component loginForm = buildLoginForm();
         addComponent(loginForm);
         setComponentAlignment(loginForm, Alignment.MIDDLE_CENTER);
@@ -58,7 +57,6 @@ public class LoginView extends VerticalLayout implements View, Styleable {
         loginPanel.setSpacing(true);
         Responsive.makeResponsive(loginPanel);
         loginPanel.addStyleName(LOGIN_PANEL_CSS);
-
         loginPanel.addComponent(buildLabels());
         loginPanel.addComponent(buildFields());
         loginPanel.addComponent(new CheckBox("Remember me", true));
@@ -69,20 +67,16 @@ public class LoginView extends VerticalLayout implements View, Styleable {
         HorizontalLayout fields = new HorizontalLayout();
         fields.setSpacing(true);
         fields.addStyleName(FIELDS_CSS);
-
         username = new TextField("Username");
         getUsername().setIcon(FontAwesome.USER);
         getUsername().addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
         getUsername().focus();
-
         password = new PasswordField("Password");
         getPassword().setIcon(FontAwesome.LOCK);
         getPassword().addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
-
         signin = new Button("Log In");
         signin.addStyleName(ValoTheme.BUTTON_PRIMARY);
         signin.setClickShortcut(KeyCode.ENTER);
-
         fields.addComponents(getUsername(), getPassword(), signin);
         fields.setComponentAlignment(signin, Alignment.BOTTOM_LEFT);
         return fields;
@@ -91,19 +85,16 @@ public class LoginView extends VerticalLayout implements View, Styleable {
     private Component buildLabels() {
         CssLayout labels = new CssLayout();
         labels.addStyleName(LABELS_CSS);
-
         Label welcome = new Label("Welcome to Webmail");
         welcome.setSizeUndefined();
         welcome.addStyleName(ValoTheme.LABEL_H4);
         welcome.addStyleName(ValoTheme.LABEL_COLORED);
         labels.addComponent(welcome);
-
         return labels;
     }
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event) {
-
     }
 
     @Override

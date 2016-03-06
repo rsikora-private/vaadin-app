@@ -1,4 +1,5 @@
 package com.sikorasoftware.webmail.inbox;
+
 import java.util.Objects;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Objects;
 
 public class MailContent {
 
-    public enum ContentType{
+    public enum ContentType {
         TEXT,
         HTML
     }
@@ -52,10 +53,9 @@ public class MailContent {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("MailContent{");
-        sb.append(", content='").append(content).append('\'');
-        sb.append(", contentType=").append(contentType);
-        sb.append('}');
-        return sb.toString();
+        String sb = "MailContent{" + ", content='" + content + '\'' +
+                ", contentType=" + contentType +
+                '}';
+        return sb;
     }
 }

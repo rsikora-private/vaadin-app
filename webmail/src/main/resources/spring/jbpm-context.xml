@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:drools="http://drools.org/drools-5.0/change-set"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:drools="http://jboss.org/kie/6.0.0/kmodule"
+
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <drools:kbase id="kbase1">
-        <drools:resources>
-            <drools:resource type="BPMN2" source="classpath:jbpm-tasks/sample.bpmn2" />
-        </drools:resources>
+    <drools:kbase name="kbase1">
+
     </drools:kbase>
 
-    <drools:ksession id="ksession1" type="stateful" kbase="kbase1">
-        <drools:configuration>
-        </drools:configuration>
+    <drools:ksession name="ksession1" type="stateful">
+
     </drools:ksession>
 
 </beans>

@@ -35,11 +35,9 @@ public final class WebmailMenu extends CustomComponent {
         setPrimaryStyleName("valo-menu");
         setId(ID);
         setSizeUndefined();
-
         // There's only one WebmailMenu per UI so this doesn't need to be
         // unregistered from the UI-scoped DashboardEventBus.
         webmailEventBus.register(this);
-
         setCompositionRoot(buildContent());
     }
 
@@ -51,12 +49,10 @@ public final class WebmailMenu extends CustomComponent {
         menuContent.addStyleName("no-horizontal-drag-hints");
         menuContent.setWidth(null);
         menuContent.setHeight("100%");
-
         menuContent.addComponent(buildTitle());
         menuContent.addComponent(buildUserMenu());
         menuContent.addComponent(buildToggleButton());
         menuContent.addComponent(buildMenuItems());
-
         return menuContent;
     }
 
@@ -100,10 +96,8 @@ public final class WebmailMenu extends CustomComponent {
     private Component buildMenuItems() {
         CssLayout menuItemsLayout = new CssLayout();
         menuItemsLayout.addStyleName("valo-menuitems");
-
         for (final ViewType view : ViewType.values()) {
             Component menuItemComponent = new ValoMenuItemButton(view);
-
             menuItemsLayout.addComponent(menuItemComponent);
         }
         return menuItemsLayout;
@@ -142,9 +136,9 @@ public final class WebmailMenu extends CustomComponent {
                     + view.getViewName().substring(1));
             webmailEventBus.register(this);
             addClickListener((ClickListener) event -> {
-                webmailEventBus.post(new WebmailEvent.PostViewChangeEvent(view));
-                UI.getCurrent().getNavigator().navigateTo(view.getViewName());
-            }
+                        webmailEventBus.post(new WebmailEvent.PostViewChangeEvent(view));
+                        UI.getCurrent().getNavigator().navigateTo(view.getViewName());
+                    }
             );
         }
 

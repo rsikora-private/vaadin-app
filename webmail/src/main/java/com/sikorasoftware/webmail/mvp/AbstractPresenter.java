@@ -9,7 +9,7 @@ public abstract class AbstractPresenter<V extends View> {
 
     protected V view;
 
-    public void setView(V view){
+    public void setView(final V view) {
         this.view = view;
     }
 

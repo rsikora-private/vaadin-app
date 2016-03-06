@@ -5,7 +5,7 @@ package com.sikorasoftware.webmail.login;
  */
 public class BadCredentialException extends RuntimeException {
 
-    public BadCredentialException(final String message){
+    public BadCredentialException(final String message) {
         super(message);
     }
 }

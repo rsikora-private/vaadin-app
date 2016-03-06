@@ -25,7 +25,6 @@ public class LoginPresenter extends AbstractPresenter<LoginView> implements Butt
 
     @Override
     public void buttonClick(final Button.ClickEvent event) {
-
         loginService.login(view.getUsername().getValue(), view.getPassword().getValue());
         webmailEventBus.post(new WebmailEvent.SuccessLoginEvent());
     }

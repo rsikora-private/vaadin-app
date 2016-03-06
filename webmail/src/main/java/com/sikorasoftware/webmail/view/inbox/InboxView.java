@@ -30,18 +30,22 @@ public class InboxView extends Panel implements View, Serializable {
     private final static String[] COLUMNS = {FROM_PROPERTY, SUBJECT_PROPERTY, DATE_PROPERTY};
     private final static String[] HEADERS = {"Od", "Temat", "Data"};
 
-    private final TabSheet          tabSheet = new TabSheet();
+    private final TabSheet tabSheet = new TabSheet();
+
     {
         tabSheet.setSizeFull();
         tabSheet.addStyleName(ValoTheme.TABSHEET_PADDED_TABBAR);
     }
-    private final Button            receiveButton = new Button("Receive post");
+
+    private final Button receiveButton = new Button("Receive post");
+
     {
         getReceiveButton().addStyleName(ValoTheme.BUTTON_PRIMARY);
         getReceiveButton().addStyleName(ValoTheme.BUTTON_SMALL);
     }
 
-    private final MailTextarea      mailTextarea = new MailTextarea();
+    private final MailTextarea mailTextarea = new MailTextarea();
+
     {
         mailTextarea.setSizeUndefined();
     }
@@ -61,19 +65,16 @@ public class InboxView extends Panel implements View, Serializable {
     public void enter(ViewChangeListener.ViewChangeEvent event) {
     }
 
-    public InboxView(){
+    public InboxView() {
         buildLayout();
     }
 
     private void buildLayout() {
-
         final VerticalSplitPanel verticalSplitPanel = new VerticalSplitPanel();
         verticalSplitPanel.setSizeFull();
         verticalSplitPanel.setSplitPosition(40, Unit.PERCENTAGE);
-
         verticalSplitPanel.setFirstComponent(tabSheet);
         verticalSplitPanel.setSecondComponent(mailTextarea);
-
         setSizeFull();
         setContent(verticalSplitPanel);
     }
@@ -82,16 +83,14 @@ public class InboxView extends Panel implements View, Serializable {
         return receiveButton;
     }
 
-    public TabSheet.Tab loadMailsTab(final List<Message> mails, final String accountName){
+    public TabSheet.Tab loadMailsTab(final List<Message> mails, final String accountName) {
         Assert.notNull(mails);
         Assert.hasText(accountName);
-
         final MailTable mailTable = new MailTable();
         mailTable.setDataSet(gridDataSetSupplier.getDataSet(mails));
         mailTable.setVisibleColumns(COLUMNS);
         mailTable.setColumnHeaders(HEADERS);
         mailTable.setSortProperty(DATE_PROPERTY, false);
-
         return tabSheet.addTab(mailTable, accountName);
     }
 

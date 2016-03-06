@@ -1,5 +1,4 @@
 package com.sikorasoftware.webmail.event;
-
 /**
  * Created by robertsikora on 31.12.2015.
  */
@@ -25,32 +24,25 @@ public class WebmailEventBus implements SubscriberExceptionHandler {
 
     public void post(final Object event) {
         Assert.notNull(event, "Event is required.");
-
         eventBus.post(event);
-
         LOGGER.debug("Event {} posted", event);
     }
 
-    public void register(final Object subscriber){
+    public void register(final Object subscriber) {
         Assert.notNull(subscriber, "Subscriber is required.");
-
         eventBus.register(subscriber);
-
         LOGGER.debug("Subscriber {} registered", subscriber);
     }
 
-    public void unregister(final Object subscriber){
+    public void unregister(final Object subscriber) {
         Assert.notNull(subscriber, "Subscriber is required.");
-
         eventBus.unregister(subscriber);
-
         LOGGER.debug("Subscriber {} unregistered", subscriber);
     }
 
     @Override
     public final void handleException(final Throwable exception,
                                       final SubscriberExceptionContext context) {
-
         LOGGER.error(exception.getMessage(), exception);
     }
 }

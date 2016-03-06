@@ -23,20 +23,18 @@ import javax.annotation.PostConstruct;
 public class MainView extends HorizontalLayout {
 
     @Autowired
-    private SpringViewProvider  viewProvider;
+    private SpringViewProvider viewProvider;
 
     @Autowired
-    private WebmailMenu         webmailMenu;
+    private WebmailMenu webmailMenu;
 
-    private ComponentContainer  content;
+    private ComponentContainer content;
 
     @PostConstruct
     public void init() {
         setSizeFull();
         addStyleName("mainview");
-
         addComponent(webmailMenu);
-
         content = new CssLayout();
         content.addStyleName("view-content");
         content.setSizeFull();

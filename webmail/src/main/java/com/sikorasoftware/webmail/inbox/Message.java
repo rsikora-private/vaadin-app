@@ -1,5 +1,6 @@
 package com.sikorasoftware.webmail.inbox;
 
+import com.sikorasoftware.webmail.account.Box;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -22,21 +23,17 @@ public final class Message implements Serializable {
 
     @Id
     private ObjectId id;
-
     private String from;
-
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Date sentDate;
-
     private String subject;
-
     @NotNull
     private Boolean unread = Boolean.TRUE;
-
     private List<MailContent> content = new ArrayList<>();
+    private List<Box> boxes = new ArrayList<>();
 
-    public Message(){
+    public Message() {
     }
 
     public Message(final String from, final Date sentDate, final String subject, final List<MailContent> content) {
@@ -95,8 +92,16 @@ public final class Message implements Serializable {
         return content;
     }
 
-    public void setContent(List<MailContent> content){
+    public void setContent(List<MailContent> content) {
         this.content = content;
+    }
+
+    public List<Box> getBoxes() {
+        return boxes;
+    }
+
+    public void setBoxes(List<Box> boxes) {
+        this.boxes = boxes;
     }
 
     @Override
@@ -118,12 +123,11 @@ public final class Message implements Serializable {
 
     @Override
     public String toString() {
-        String sb = "Message{" + "from='" + from + '\'' +
+        return "Message{" + "from='" + from + '\'' +
                 ", sentDate=" + sentDate +
                 ", subject='" + subject + '\'' +
                 ", content='" + content + '\'' +
                 ", unread='" + unread + '\'' +
                 '}';
-        return sb;
     }
 }

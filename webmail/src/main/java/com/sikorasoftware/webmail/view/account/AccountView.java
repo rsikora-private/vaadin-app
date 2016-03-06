@@ -13,6 +13,7 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
+
 import javax.annotation.PostConstruct;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -37,28 +38,34 @@ public class AccountView extends FormLayout implements View, Serializable {
         viewManager.configure(this);
     }
 
-    private final TabSheet        tabSheet = new TabSheet();
+    private final TabSheet tabSheet = new TabSheet();
+
     {
         tabSheet.setHeight(500, Unit.PIXELS);
         tabSheet.addStyleName(ValoTheme.TABSHEET_PADDED_TABBAR);
     }
 
-    private final Button          addNewButton = new Button("Add new account");
+    private final Button addNewButton = new Button("Add new account");
+
     {
         addNewButton.addStyleName(ValoTheme.BUTTON_SMALL);
     }
-    private final Button          saveAccountButton = new Button("Save account");
+
+    private final Button saveAccountButton = new Button("Save account");
+
     {
         saveAccountButton.addStyleName(ValoTheme.BUTTON_PRIMARY);
         saveAccountButton.addStyleName(ValoTheme.BUTTON_SMALL);
     }
-    private final Button          deleteButton = new Button("Delete account");
+
+    private final Button deleteButton = new Button("Delete account");
+
     {
         deleteButton.addStyleName(ValoTheme.BUTTON_DANGER);
         deleteButton.addStyleName(ValoTheme.BUTTON_SMALL);
     }
 
-    public AccountView(){
+    public AccountView() {
         buildLayout();
     }
 
@@ -66,7 +73,6 @@ public class AccountView extends FormLayout implements View, Serializable {
         final HorizontalLayout horizontalLayout = new HorizontalLayout();
         horizontalLayout.setSpacing(true);
         horizontalLayout.addComponents(addNewButton, saveAccountButton, deleteButton);
-
         addComponents(horizontalLayout, tabSheet);
     }
 
@@ -74,50 +80,43 @@ public class AccountView extends FormLayout implements View, Serializable {
     public void enter(ViewChangeListener.ViewChangeEvent event) {
     }
 
-    public void removeAllTabs(){
+    public void removeAllTabs() {
         TAB_BINDING.keySet().forEach(tabSheet::removeTab);
         TAB_BINDING.clear();
     }
 
-    public void addTab(final String tabCaption, final Account account, boolean selectTab){
-
+    public void addTab(final String tabCaption, final Account account, boolean selectTab) {
         final AccountForm accountForm = new AccountForm();
         final BoxForm boxForm = new BoxForm(account.getBoxes());
         final RuleForm ruleForm = new RuleForm();
-
         final VerticalLayout verticalLayout = new VerticalLayout();
-
         Panel accountPanel = new Panel();
         accountPanel.setCaption("Settings");
         accountPanel.setContent(accountForm);
-
         Panel boxPanel = new Panel();
         boxPanel.setCaption("Mail boxes");
         boxPanel.setContent(boxForm);
-
         Panel rulePanel = new Panel();
         rulePanel.setCaption("Rules");
         rulePanel.setContent(ruleForm);
-
         verticalLayout.addComponents(accountPanel, boxPanel, rulePanel);
-
         final TabSheet.Tab tab = tabSheet.addTab(verticalLayout, tabCaption);
-        if(selectTab) {
+        if (selectTab) {
             tabSheet.setSelectedTab(tab);
         }
         final BeanFieldGroup<Account> accountBeanFieldGroup = BeanFieldGroup.bindFieldsBuffered(account, accountForm);
         TAB_BINDING.put(tab, accountBeanFieldGroup);
     }
 
-    public BeanFieldGroup getCurrentTabBinder(){
+    public BeanFieldGroup getCurrentTabBinder() {
         final TabSheet.Tab selectedTab = tabSheet.getTab(tabSheet.getSelectedTab());
         final BeanFieldGroup<Account> binder = TAB_BINDING.get(selectedTab);
         Assert.notNull(binder);
         return binder;
     }
 
-    public AccountForm getSelectedAccountForm(){
-        return (AccountForm) ((Panel)((VerticalLayout) tabSheet.getSelectedTab()).getComponent(0)).getContent();
+    public AccountForm getSelectedAccountForm() {
+        return (AccountForm) ((Panel) ((VerticalLayout) tabSheet.getSelectedTab()).getComponent(0)).getContent();
     }
 
     public Button getAddNewButton() {
