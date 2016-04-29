@@ -53,9 +53,8 @@ public class MailContent {
 
     @Override
     public String toString() {
-        String sb = "MailContent{" + ", content='" + content + '\'' +
+        return "MailContent{" + ", content='" + content + '\'' +
                 ", contentType=" + contentType +
                 '}';
-        return sb;
     }
 }

@@ -24,6 +24,7 @@ public class DefaultViewManager implements ViewManager {
     public void configure(final View view) {
         Assert.notNull(view, "Passed view cannot be null.");
         final AbstractPresenter p = (AbstractPresenter) applicationContext.getBean(getPresenterName(view.getClass()));
+        //noinspection unchecked
         p.setView(view);
         p.bind();
 

@@ -38,6 +38,7 @@ public class InboxService {
             final Account account = defaultAccount.get();
             return account.getMessages().stream().map(mailMessageRepository::findOne).collect(Collectors.toList());
         }
+        //noinspection unchecked
         return Collections.EMPTY_LIST;
     }
 

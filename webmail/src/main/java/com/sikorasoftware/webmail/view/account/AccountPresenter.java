@@ -53,7 +53,7 @@ public class AccountPresenter extends AbstractPresenter<AccountView> implements 
 
     private Button.ClickListener saveAccount() {
         return event -> {
-            final BeanFieldGroup<Account> tabBinder = view.getCurrentTabBinder();
+            @SuppressWarnings("unchecked") final BeanFieldGroup<Account> tabBinder = view.getCurrentTabBinder();
             try {
                 TextFieldVisitatorEngine.visit(view.getSelectedAccountForm(), new ValidationVisibleVisitator(true));
                 tabBinder.commit();
@@ -67,7 +67,7 @@ public class AccountPresenter extends AbstractPresenter<AccountView> implements 
 
     private Button.ClickListener deleteAccount() {
         return event -> {
-            final BeanFieldGroup<Account> tabBinder = view.getCurrentTabBinder();
+            @SuppressWarnings("unchecked") final BeanFieldGroup<Account> tabBinder = view.getCurrentTabBinder();
             final Account selectedAccount = tabBinder.getItemDataSource().getBean();
             if (selectedAccount.getId() != null) {
                 accountService.deleteByObjectId(selectedAccount.getId());
