@@ -3,8 +3,8 @@ package com.sikorasoftware.webmail.view.inbox;
 import com.sikorasoftware.webmail.account.Account;
 import com.sikorasoftware.webmail.account.AccountService;
 import com.sikorasoftware.webmail.common.component.table.MailTable;
+import com.sikorasoftware.webmail.inbox.Email;
 import com.sikorasoftware.webmail.inbox.InboxService;
-import com.sikorasoftware.webmail.inbox.Message;
 import com.sikorasoftware.webmail.mvp.AbstractPresenter;
 import com.vaadin.data.Property;
 import com.vaadin.spring.annotation.UIScope;
@@ -45,10 +45,10 @@ public class InboxPresenter extends AbstractPresenter<InboxView> implements Seri
         if (accountOptional.isPresent()) {
             final List<TabSheet.Tab> addedTabs = new ArrayList<>();
             final Account account = accountOptional.get();
-            final List<Message> messages = inboxService.getMessagesForDefaultAccount();
-            addedTabs.add(view.loadMailsTab(messages, account.getName()));
+            final List<Email> emails = inboxService.getMessagesForDefaultAccount();
+            addedTabs.add(view.loadMailsTab(emails, account.getName()));
             account.getBoxes().forEach(box
-                    -> addedTabs.add(view.loadMailsTab(messages, box.getName())));
+                    -> addedTabs.add(view.loadMailsTab(emails, box.getName())));
             addedTabs.forEach(tab -> ((MailTable) tab.getComponent()).addValueChangeListener(selectMessage()));
         }
     }
@@ -64,29 +64,29 @@ public class InboxPresenter extends AbstractPresenter<InboxView> implements Seri
         return event -> {
             final Field.ValueChangeEvent valueChangeEvent = (Field.ValueChangeEvent) event;
             if (valueChangeEvent != null) {
-                final Message originalMailMessage = (Message) view.getMailTable().getValue();
-                if (originalMailMessage != null) {
-                    int index = view.getMailTable().getDataSet().indexOfId(originalMailMessage);
-                    view.getMailTable().getDataSet().removeItem(originalMailMessage);
-                    Message ms = new Message(
-                            originalMailMessage.getId(),
-                            originalMailMessage.getFrom(),
-                            originalMailMessage.getSentDate(),
-                            originalMailMessage.getSubject(),
+                final Email originalMailEmail = (Email) view.getMailTable().getValue();
+                if (originalMailEmail != null) {
+                    int index = view.getMailTable().getDataSet().indexOfId(originalMailEmail);
+                    view.getMailTable().getDataSet().removeItem(originalMailEmail);
+                    Email ms = new Email(
+                            originalMailEmail.getId(),
+                            originalMailEmail.getFrom(),
+                            originalMailEmail.getSentDate(),
+                            originalMailEmail.getSubject(),
                             false,
-                            originalMailMessage.getContent());
+                            originalMailEmail.getContent());
                     view.getMailTable().getDataSet().addItemAt(index, ms);
-                    markAsRed(originalMailMessage);
+                    markAsRed(originalMailEmail);
                     view.getMailTextarea().setContent(ms.getContent());
                 }
             }
         };
     }
 
-    private void markAsRed(final Message mailMessage) {
-        if (mailMessage.isUnread()) {
-            mailMessage.setUnread(false);
-            inboxService.saveMessage(mailMessage);
+    private void markAsRed(final Email mailEmail) {
+        if (mailEmail.isUnread()) {
+            mailEmail.setUnread(false);
+            inboxService.saveMessage(mailEmail);
         }
     }
 }

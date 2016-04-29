@@ -17,8 +17,8 @@ import java.util.Objects;
  * Created by robertsikora on 06.01.2016.
  */
 
-@Document(collection = Message.COLLECTION_NAME)
-public final class Message implements Serializable {
+@Document(collection = Email.COLLECTION_NAME)
+public final class Email implements Serializable {
     final static String COLLECTION_NAME = "mails";
 
     @Id
@@ -30,20 +30,20 @@ public final class Message implements Serializable {
     private String subject;
     @NotNull
     private Boolean unread = Boolean.TRUE;
-    private List<MailContent> content = new ArrayList<>();
+    private List<EmailContent> content = new ArrayList<>();
     private List<Box> boxes = new ArrayList<>();
 
-    public Message() {
+    public Email() {
     }
 
-    public Message(final String from, final Date sentDate, final String subject, final List<MailContent> content) {
+    public Email(final String from, final Date sentDate, final String subject, final List<EmailContent> content) {
         this.setFrom(from);
         this.sentDate = sentDate;
         this.setSubject(subject);
         this.content = content;
     }
 
-    public Message(final ObjectId id, final String from, final Date sentDate, final String subject, final Boolean unread, final List<MailContent> content) {
+    public Email(final ObjectId id, final String from, final Date sentDate, final String subject, final Boolean unread, final List<EmailContent> content) {
         this.id = id;
         this.from = from;
         this.sentDate = sentDate;
@@ -88,11 +88,11 @@ public final class Message implements Serializable {
         return subject;
     }
 
-    public List<MailContent> getContent() {
+    public List<EmailContent> getContent() {
         return content;
     }
 
-    public void setContent(List<MailContent> content) {
+    public void setContent(List<EmailContent> content) {
         this.content = content;
     }
 
@@ -108,7 +108,7 @@ public final class Message implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Message that = (Message) o;
+        Email that = (Email) o;
         return Objects.equals(from, that.from) &&
                 Objects.equals(sentDate, that.sentDate) &&
                 Objects.equals(subject, that.subject) &&
@@ -123,7 +123,7 @@ public final class Message implements Serializable {
 
     @Override
     public String toString() {
-        return "Message{" + "from='" + from + '\'' +
+        return "Email{" + "from='" + from + '\'' +
                 ", sentDate=" + sentDate +
                 ", subject='" + subject + '\'' +
                 ", content='" + content + '\'' +

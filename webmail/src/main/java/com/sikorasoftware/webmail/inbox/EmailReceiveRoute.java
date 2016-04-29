@@ -24,8 +24,8 @@ public class EmailReceiveRoute extends SpringRouteBuilder {
     private final static String RECEIVE_PROTOCOL = "imaps";
     private final static int RECEIVE_DELAY_IN_MINS = 1 * 60_000;
 
-    private AccountService accountService;
-    private MailProcessor mailProcessor;
+    private AccountService  accountService;
+    private EmailProcessor emailProcessor;
 
     @Override
     public void configure() throws Exception {
@@ -36,7 +36,7 @@ public class EmailReceiveRoute extends SpringRouteBuilder {
             LOGGER.info("Email uri: {}", uri);
             from(uri)
                     .routeId("email-receive-route")
-                    .process(mailProcessor);
+                    .process(emailProcessor);
 
         } else {
             LOGGER.warn("The email receive route cannot be configured. There is not any defined account.");
@@ -59,7 +59,7 @@ public class EmailReceiveRoute extends SpringRouteBuilder {
         this.accountService = accountService;
     }
 
-    public void setMailProcessor(final MailProcessor mailProcessor) {
-        this.mailProcessor = mailProcessor;
+    public void setEmailProcessor(final EmailProcessor emailProcessor) {
+        this.emailProcessor = emailProcessor;
     }
 }

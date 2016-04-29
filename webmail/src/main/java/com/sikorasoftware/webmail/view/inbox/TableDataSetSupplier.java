@@ -1,6 +1,6 @@
 package com.sikorasoftware.webmail.view.inbox;
 
-import com.sikorasoftware.webmail.inbox.Message;
+import com.sikorasoftware.webmail.inbox.Email;
 import com.vaadin.data.util.BeanItemContainer;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +15,8 @@ public class TableDataSetSupplier {
 
     private final static String ENDS = " ...";
 
-    public BeanItemContainer<Message> getDataSet(final List<Message> content) {
-        final BeanItemContainer<Message> container = new BeanItemContainer<>(Message.class);
+    public BeanItemContainer<Email> getDataSet(final List<Email> content) {
+        final BeanItemContainer<Email> container = new BeanItemContainer<>(Email.class);
         content.forEach(mail -> {
             formatEntity(mail);
             container.addItem(mail);
@@ -24,7 +24,7 @@ public class TableDataSetSupplier {
         return container;
     }
 
-    private void formatEntity(final Message entity) {
+    private void formatEntity(final Email entity) {
         entity.setFrom(substringIfPossible(entity.getFrom(), 40));
         entity.setSubject(substringIfPossible(entity.getSubject(), 90));
     }

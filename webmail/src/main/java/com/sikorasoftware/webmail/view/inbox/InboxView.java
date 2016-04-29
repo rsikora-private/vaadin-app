@@ -1,13 +1,16 @@
 package com.sikorasoftware.webmail.view.inbox;
 
-import com.sikorasoftware.webmail.common.component.textarea.MailTextarea;
-import com.sikorasoftware.webmail.inbox.Message;
-import com.sikorasoftware.webmail.mvp.ViewManager;
 import com.sikorasoftware.webmail.common.component.table.MailTable;
+import com.sikorasoftware.webmail.common.component.textarea.MailTextarea;
+import com.sikorasoftware.webmail.inbox.Email;
+import com.sikorasoftware.webmail.mvp.ViewManager;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.spring.annotation.SpringView;
-import com.vaadin.ui.*;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Panel;
+import com.vaadin.ui.TabSheet;
+import com.vaadin.ui.VerticalSplitPanel;
 import com.vaadin.ui.themes.ValoTheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
@@ -83,7 +86,7 @@ public class InboxView extends Panel implements View, Serializable {
         return receiveButton;
     }
 
-    public TabSheet.Tab loadMailsTab(final List<Message> mails, final String accountName) {
+    public TabSheet.Tab loadMailsTab(final List<Email> mails, final String accountName) {
         Assert.notNull(mails);
         Assert.hasText(accountName);
         final MailTable mailTable = new MailTable();

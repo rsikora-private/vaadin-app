@@ -5,18 +5,18 @@ import org.slf4j.LoggerFactory;
 
 import javax.mail.*;
 import javax.mail.internet.MimeMessage;
-import java.io.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by robertsikora on 07.01.2016.
  */
-public class MailMessageCreator {
+public class EmailCreator {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(MailMessageCreator.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(EmailCreator.class);
 
-    public Message createMessage(final javax.mail.Message message)
+    public Email createMessage(final javax.mail.Message message)
             throws MessagingException, IOException {
         final StringBuilder from = new StringBuilder();
         for (Address address : message.getFrom()) {
@@ -27,17 +27,17 @@ public class MailMessageCreator {
         }
         //due to javax.mail.MessagingException: Unable to load BODYSTRUCTURE
         final MimeMessage mimeMessageWrapper = new MimeMessage((MimeMessage) message);
-        return new Message(from.toString(), message.getSentDate(),
+        return new Email(from.toString(), message.getSentDate(),
                 message.getSubject(), getFinalContent(mimeMessageWrapper));
     }
 
-    private List<MailContent> getFinalContent(final Part part) throws MessagingException,
+    private List<EmailContent> getFinalContent(final Part part) throws MessagingException,
             IOException {
-        final List<MailContent> result = new ArrayList<>();
+        final List<EmailContent> result = new ArrayList<>();
         final Object content = part.getContent();
         if (content instanceof String) {
             final String type = part.getContentType();
-            result.add(new MailContent(content.toString(), resolveContentType(type)));
+            result.add(new EmailContent(content.toString(), resolveContentType(type)));
 
         } else if (content instanceof Multipart) {
             final Multipart mp = (Multipart) content;
@@ -52,9 +52,9 @@ public class MailMessageCreator {
         return result;
     }
 
-    private MailContent.ContentType resolveContentType(final String contentType) {
+    private EmailContent.ContentType resolveContentType(final String contentType) {
         return contentType.contains("text/plain")
-                ? MailContent.ContentType.TEXT
-                : MailContent.ContentType.HTML;
+                ? EmailContent.ContentType.TEXT
+                : EmailContent.ContentType.HTML;
     }
 }

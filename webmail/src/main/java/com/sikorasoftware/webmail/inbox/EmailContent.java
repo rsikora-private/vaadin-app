@@ -6,7 +6,7 @@ import java.util.Objects;
  * Created by robertsikora on 09.01.2016.
  */
 
-public class MailContent {
+public class EmailContent {
 
     public enum ContentType {
         TEXT,
@@ -16,7 +16,7 @@ public class MailContent {
     private String content;
     private ContentType contentType;
 
-    public MailContent(final String content, final ContentType contentType) {
+    public EmailContent(final String content, final ContentType contentType) {
         this.content = content;
         this.contentType = contentType;
     }
@@ -41,7 +41,7 @@ public class MailContent {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MailContent that = (MailContent) o;
+        EmailContent that = (EmailContent) o;
         return Objects.equals(content, that.content) &&
                 contentType == that.contentType;
     }
@@ -53,7 +53,7 @@ public class MailContent {
 
     @Override
     public String toString() {
-        return "MailContent{" + ", content='" + content + '\'' +
+        return "EmailContent{" + ", content='" + content + '\'' +
                 ", contentType=" + contentType +
                 '}';
     }

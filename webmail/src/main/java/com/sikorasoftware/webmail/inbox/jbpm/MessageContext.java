@@ -8,7 +8,7 @@ public final class MessageContext {
     private final String sender;
     private final String boxName;
 
-    public MessageContext(String sender, String boxName) {
+    public MessageContext(final String sender, final String boxName) {
         this.sender = sender;
         this.boxName = boxName;
     }

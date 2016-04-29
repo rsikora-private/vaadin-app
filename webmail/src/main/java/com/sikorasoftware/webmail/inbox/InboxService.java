@@ -5,7 +5,9 @@ import com.sikorasoftware.webmail.account.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -13,38 +15,37 @@ import java.util.stream.Collectors;
  */
 public class InboxService {
 
-    private MailMessageRepository mailMessageRepository;
-    private AccountService accountService;
+    private EmailRepository emailRepository;
+    private AccountService          accountService;
 
-    public void saveMessage(final Message mailMessage) {
-        Assert.notNull(mailMessage);
-        mailMessageRepository.save(mailMessage);
+    public void saveMessage(final Email email) {
+        Assert.notNull(email);
+        emailRepository.save(email);
     }
 
-    public void saveMessageForDefaultAccount(final Message mailMessage) {
-        Assert.notNull(mailMessage);
-        final Message dbMessage = mailMessageRepository.save(mailMessage); //single transaction
+    public void saveMessageForDefaultAccount(final Email email) {
+        Assert.notNull(email);
+        final Email dbEmail = emailRepository.save(email); //single transaction
         final Optional<Account> defaultAccount = accountService.getDefaultAccount();  //single transaction
         Assert.isTrue(defaultAccount.isPresent(), "Cannot find default account.");
         final Account account = defaultAccount.get();
-        account.getMessages().add(dbMessage.getId()); //on failure rollback here ???
+        account.getMessages().add(dbEmail.getId());
         //single transaction
         accountService.save(account);
     }
 
-    public List<Message> getMessagesForDefaultAccount() {
+    public List<Email> getMessagesForDefaultAccount() {
         final Optional<Account> defaultAccount = accountService.getDefaultAccount();
         if (defaultAccount.isPresent()) {
             final Account account = defaultAccount.get();
-            return account.getMessages().stream().map(mailMessageRepository::findOne).collect(Collectors.toList());
+            return account.getMessages().stream().map(emailRepository::findOne).collect(Collectors.toList());
         }
-        //noinspection unchecked
-        return Collections.EMPTY_LIST;
+        return Collections.emptyList();
     }
 
     @Autowired
-    public void setMailMessageRepository(final MailMessageRepository mailMessageRepository) {
-        this.mailMessageRepository = mailMessageRepository;
+    public void setEmailRepository(final EmailRepository emailRepository) {
+        this.emailRepository = emailRepository;
     }
 
     public void setAccountService(final AccountService accountService) {

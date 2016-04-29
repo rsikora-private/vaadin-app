@@ -1,4 +1,4 @@
-import com.sikorasoftware.webmail.inbox.Message
+import com.sikorasoftware.webmail.inbox.Email
 import com.sikorasoftware.webmail.inbox.jbpm.MessageContext
 
 dialect "java"
@@ -7,7 +7,7 @@ global MessageContext messageCtx
 
 rule "Messages from specific sender"
     when
-     $message : Message($message.getFrom() == messageCtx.sender)
+        $message : Email($message.getFrom() == messageCtx.sender)
     then
-     System.out.println("Od Robert Sikora. Przypisz do:" + messageCtx.getBoxName());
+        System.out.println("Od Robert Sikora. Przypisz do:" + messageCtx.getBoxName());
 end
