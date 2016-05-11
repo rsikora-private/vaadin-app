@@ -6,6 +6,8 @@ import org.apache.camel.Processor;
 import org.apache.camel.component.mail.MailMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import javax.mail.Message;
@@ -15,6 +17,8 @@ import java.util.List;
 /**
  * Created by robertsikora on 07.01.2016.
  */
+
+@Component
 public class EmailProcessor implements Processor {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(EmailProcessor.class);
@@ -37,6 +41,7 @@ public class EmailProcessor implements Processor {
         this.emailCreator = emailCreator;
     }
 
+    @Autowired
     public void setListeners(final List<WebmailListener> listeners) {
         Assert.notEmpty(listeners);
         this.listeners = listeners;

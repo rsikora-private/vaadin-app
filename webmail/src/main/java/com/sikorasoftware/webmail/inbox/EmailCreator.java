@@ -12,6 +12,8 @@ import java.util.List;
 /**
  * Created by robertsikora on 07.01.2016.
  */
+
+@org.springframework.stereotype.Service
 public class EmailCreator {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(EmailCreator.class);

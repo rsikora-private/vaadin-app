@@ -3,6 +3,7 @@ package com.sikorasoftware.webmail.inbox;
 import com.sikorasoftware.webmail.account.Account;
 import com.sikorasoftware.webmail.account.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.util.Collections;
@@ -13,9 +14,13 @@ import java.util.stream.Collectors;
 /**
  * Created by robertsikora on 06.01.2016.
  */
+
+@Service
 public class InboxService {
 
-    private EmailRepository emailRepository;
+    @Autowired
+    private EmailRepository         emailRepository;
+    @Autowired
     private AccountService          accountService;
 
     public void saveMessage(final Email email) {
@@ -41,14 +46,5 @@ public class InboxService {
             return account.getMessages().stream().map(emailRepository::findOne).collect(Collectors.toList());
         }
         return Collections.emptyList();
-    }
-
-    @Autowired
-    public void setEmailRepository(final EmailRepository emailRepository) {
-        this.emailRepository = emailRepository;
-    }
-
-    public void setAccountService(final AccountService accountService) {
-        this.accountService = accountService;
     }
 }

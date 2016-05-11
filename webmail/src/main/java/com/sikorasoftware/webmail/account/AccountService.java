@@ -2,6 +2,7 @@ package com.sikorasoftware.webmail.account;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
@@ -12,6 +13,8 @@ import java.util.Optional;
 /**
  * Created by robertsikora on 01.01.2016.
  */
+
+@Service
 public class AccountService {
 
     private AccountRepository accountRepository;

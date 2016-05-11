@@ -5,6 +5,8 @@ import com.sikorasoftware.webmail.account.AccountService;
 import org.apache.camel.spring.SpringRouteBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
@@ -16,16 +18,18 @@ import java.util.Optional;
  * openssl x509 -in <(openssl s_client -connect poczta.interia.pl:993 -prexit 2>/dev/null) -out ~/example.crt
  * sudo keytool -importcert -file ~/example.crt -alias example -keystore $(/usr/libexec/java_home)/jre/lib/security/cacerts -storepass changeit
  */
-
+@Component
 public class EmailReceiveRoute extends SpringRouteBuilder {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(EmailReceiveRoute.class);
 
-    private final static String RECEIVE_PROTOCOL = "imaps";
-    private final static int RECEIVE_DELAY_IN_MINS = 1 * 60_000;
+    private final static String     RECEIVE_PROTOCOL        = "imaps";
+    private final static int        RECEIVE_DELAY_IN_MIN   = 1 * 60_000;
 
+    @Autowired
     private AccountService  accountService;
-    private EmailProcessor emailProcessor;
+    @Autowired
+    private EmailProcessor  emailProcessor;
 
     @Override
     public void configure() throws Exception {
@@ -49,7 +53,7 @@ public class EmailReceiveRoute extends SpringRouteBuilder {
                 + ":" + account.getImapPort()
                 + "?password=" + account.getPassword()
                 + "&username=" + account.getEmail()
-                + "&consumer.delay=" + RECEIVE_DELAY_IN_MINS
+                + "&consumer.delay=" + RECEIVE_DELAY_IN_MIN
                 + "&mapMailMessage=false";
         //   + "&delete=false"
         //   + "&unseen=true";

@@ -1,12 +1,17 @@
 package com.sikorasoftware.webmail.inbox;
 
 import com.sikorasoftware.webmail.common.listener.WebmailListener;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by robertsikora on 29.04.2016.
  */
+
+@Component
 public class SaveEmailListener implements WebmailListener<InboxListenerContext>{
 
+    @Autowired
     private InboxService inboxService;
 
     @Override
