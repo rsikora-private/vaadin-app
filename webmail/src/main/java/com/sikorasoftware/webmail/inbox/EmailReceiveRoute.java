@@ -38,10 +38,12 @@ public class EmailReceiveRoute extends SpringRouteBuilder {
             final Account account = accountOptional.get();
             final String uri = buildImapUri(account);
             LOGGER.info("Email uri: {}", uri);
-            from(uri)
-                    .routeId("email-receive-route")
-                    .process(emailProcessor);
-
+                 from(uri)
+                 .routeId("email-receive-route")
+                    .onException(IllegalArgumentException.class).handled(true)
+                    .log("Exceptions occurs during email receiving.")
+                    .end()
+                 .process(emailProcessor);
         } else {
             LOGGER.warn("The email receive route cannot be configured. There is not any defined account.");
         }

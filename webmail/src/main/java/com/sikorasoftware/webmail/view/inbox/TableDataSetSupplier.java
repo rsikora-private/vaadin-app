@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 public class TableDataSetSupplier {
 
-    private final static String ENDS = " ...";
+    private final static String LINE_SUFFIX = " ...";
 
     public BeanItemContainer<Email> getDataSet(final List<Email> content) {
         final BeanItemContainer<Email> container = new BeanItemContainer<>(Email.class);
@@ -31,7 +31,7 @@ public class TableDataSetSupplier {
 
     private String substringIfPossible(final String str, final int count) {
         if (str.length() > count) {
-            return str.substring(0, count).concat(ENDS);
+            return str.substring(0, count).concat(LINE_SUFFIX);
         }
         return str;
     }

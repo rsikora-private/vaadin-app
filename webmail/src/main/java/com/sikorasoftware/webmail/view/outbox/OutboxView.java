@@ -36,22 +36,29 @@ public class OutboxView extends Panel implements View, Serializable {
     }
 
     private void buildLayout(){
-        final FormLayout sample = new FormLayout();
-        sample.addStyleName("outlined");
-        sample.setSizeFull();
-        sample.setSpacing(true);
+        final FormLayout sendForm = new FormLayout();
+        sendForm.addStyleName("outlined");
+        sendForm.setSizeFull();
+        sendForm.setSpacing(true);
 
-        final Component child1 = new PopupDateField("Child 1");
-        child1.setWidth(100.0f, Unit.PERCENTAGE);
-        sample.addComponent(child1);
+        final TextField toTextField = new TextField("Do:", "");
+        toTextField.setWidth(90.0f, Unit.PERCENTAGE);
+        sendForm.addComponent(toTextField);
 
-        final TextField child2 = new TextField("Child 2", "");
-        child2.setWidth(100.0f, Unit.PERCENTAGE);
-        sample.addComponent(child2);
+        final TextField copyTextField = new TextField("Kopia do:", "");
+        copyTextField.setWidth(90.0f, Unit.PERCENTAGE);
+        sendForm.addComponent(copyTextField);
 
-        sample.addComponent(new CheckBox("Child 3"));
-        sample.addComponent(new Button("Child 4"));
+        sendForm.addComponent(new CheckBox("Zachowaj w wyslanych"));
+
+        final RichTextArea richTextArea = new RichTextArea();
+        richTextArea.setImmediate(true);
+        richTextArea.setSizeFull();
+        sendForm.addComponent(richTextArea);
+
+        sendForm.addComponent(new Button("Wyslij"));
+
         setSizeFull();
-        setContent(sample);
+        setContent(sendForm);
     }
 }

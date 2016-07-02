@@ -24,6 +24,7 @@ public class EmailProcessor implements Processor {
     private final static Logger LOGGER = LoggerFactory.getLogger(EmailProcessor.class);
 
     private List<WebmailListener>   listeners = new ArrayList<>();
+    @Autowired
     private EmailCreator            emailCreator;
 
     @Override
@@ -31,14 +32,8 @@ public class EmailProcessor implements Processor {
         final MailMessage in = (MailMessage) exchange.getIn();
         final Message message = in.getOriginalMessage();
         final Email email = emailCreator.createMessage(message);
-
         listeners.forEach(listener -> listener.listen(new InboxListenerContext(email)));
-
         LOGGER.info("Save a new mail message: {}", email.toString());
-    }
-
-    public void setEmailCreator(final EmailCreator emailCreator) {
-        this.emailCreator = emailCreator;
     }
 
     @Autowired

@@ -3,20 +3,22 @@ package com.sikorasoftware.webmail;
 
 import org.drools.KnowledgeBase;
 import org.drools.KnowledgeBaseFactory;
-import org.drools.builder.*;
+import org.drools.builder.KnowledgeBuilder;
+import org.drools.builder.KnowledgeBuilderErrors;
+import org.drools.builder.KnowledgeBuilderFactory;
+import org.drools.builder.ResourceType;
 import org.drools.io.ResourceFactory;
-import org.drools.runtime.StatefulKnowledgeSession;
 
 /**
  * Created by robertsikora on 19.02.2016.
  */
 public class DroolsTest {
 
-    public final static void main(String... args) throws Exception {
-        KnowledgeBase kbase = readKnowledgeBase();
-        StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
-        ksession.fireAllRules();
-    }
+    //public final static void main(String... args) throws Exception {
+    //    KnowledgeBase kbase = readKnowledgeBase();
+    //    StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
+    //    ksession.fireAllRules();
+    //}
 
     private static KnowledgeBase readKnowledgeBase() throws Exception {
         KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();

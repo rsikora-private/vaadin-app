@@ -27,11 +27,11 @@ import java.util.List;
 public class InboxView extends Panel implements View, Serializable {
     public final static String NAME = "inbox";
 
-    private final static String FROM_PROPERTY = "from";
-    private final static String SUBJECT_PROPERTY = "subject";
-    private final static String DATE_PROPERTY = "sentDate";
-    private final static String[] COLUMNS = {FROM_PROPERTY, SUBJECT_PROPERTY, DATE_PROPERTY};
-    private final static String[] HEADERS = {"Od", "Temat", "Data"};
+    private final static String     FROM_PROPERTY       = "from";
+    private final static String     SUBJECT_PROPERTY    = "subject";
+    private final static String     DATE_PROPERTY       = "sentDate";
+    private final static String[]   COLUMNS             = {FROM_PROPERTY, SUBJECT_PROPERTY, DATE_PROPERTY};
+    private final static String[]   HEADERS             = {"Od", "Temat", "Data"};
 
     private final TabSheet tabSheet = new TabSheet();
 
